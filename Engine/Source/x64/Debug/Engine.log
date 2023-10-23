@@ -1,8 +1,2 @@
-﻿  Application.cpp
-  log.cpp
-  Main.cpp
-  ModuleInput.cpp
-  ModuleOpenGL.cpp
-  ModuleWindow.cpp
-  Generating Code...
-  Engine.vcxproj -> C:\Users\jordinm2\source\repos\Engine\Source\x64\Debug\Engine.exe
+﻿  ModuleOpenGL.cpp
+  Engine.vcxproj -> D:\Repositories\3D-Engine-Glew\Engine\Source\x64\Debug\Engine.exe

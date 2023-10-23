@@ -29,10 +29,6 @@ bool Application::Init()
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret; ++it)
 		ret = (*it)->Init();
 
-	// Aqui o module?
-	SDL_GL_CreateContext(window->window);
-	// SDL_WINDOW_OPENGL(ModuleWindow);
-
 	return ret;
 }
 
