@@ -27,6 +27,12 @@ bool ModuleOpenGL::Init()
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24); // we want to have a depth buffer with 24 bits
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8); // we want to have a stencil buffer with 8 bits
 
+	// Initialize render pipeline options
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_SCISSOR_TEST);
+	glEnable(GL_STENCIL_TEST);
+
 	// SDL_WINDOW_OPENGL(ModuleWindow); // Already on ModuleWindow
 	SDL_GL_CreateContext(App->GetWindow()->window);
 	

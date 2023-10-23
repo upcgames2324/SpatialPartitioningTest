@@ -32,3 +32,5 @@
 *.app
 
 Engine/Source/.vs/
+
+Engine/Source/x64/Debug/
