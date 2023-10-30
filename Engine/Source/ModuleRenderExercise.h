@@ -11,5 +11,12 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+
+	unsigned CreateTriangleVBO();
+	void DestroyVBO(unsigned vbo);
+	void RenderVBO(unsigned vbo);
+
+private:
+	unsigned vbo1;
 };
 

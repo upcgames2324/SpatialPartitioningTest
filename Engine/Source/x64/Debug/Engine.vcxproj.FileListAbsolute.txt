@@ -1,2 +1,0 @@
-C:\Users\jordinm2\source\repos\Engine\Source\x64\Debug\Engine.exe
-D:\Repositories\3D-Engine-Glew\Engine\Source\x64\Debug\Engine.exe

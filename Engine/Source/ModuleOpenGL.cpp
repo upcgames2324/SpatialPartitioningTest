@@ -33,8 +33,10 @@ bool ModuleOpenGL::Init()
 	glEnable(GL_SCISSOR_TEST);
 	glEnable(GL_STENCIL_TEST);
 
+	// TODO: Initialize debug options
+
 	// SDL_WINDOW_OPENGL(ModuleWindow); // Already on ModuleWindow
-	SDL_GL_CreateContext(App->GetWindow()->window);
+	context = SDL_GL_CreateContext(App->GetWindow()->window);
 	
 	// Init GLEW library
 	GLenum err = glewInit();
