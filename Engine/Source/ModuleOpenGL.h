@@ -1,6 +1,5 @@
 #pragma once
 #include "Module.h"
-#include "Globals.h"
 
 struct SDL_Texture;
 struct SDL_Renderer;
@@ -18,6 +17,8 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 	void WindowResized(unsigned width, unsigned height);
+
+	void* getContext();
 
 private:
 	void* context;

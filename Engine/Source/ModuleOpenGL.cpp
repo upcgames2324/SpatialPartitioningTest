@@ -1,6 +1,6 @@
+#include "ModuleOpenGL.h"
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleOpenGL.h"
 #include "ModuleWindow.h"
 #include "SDL.h"
 #include <GL/glew.h>
@@ -92,5 +92,10 @@ bool ModuleOpenGL::CleanUp()
 
 void ModuleOpenGL::WindowResized(unsigned width, unsigned height)
 {
+}
+
+SDL_GLContext ModuleOpenGL::getContext()
+{
+	return context;
 }
 
