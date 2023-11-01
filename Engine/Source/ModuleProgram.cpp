@@ -1,5 +1,6 @@
 #include "ModuleProgram.h"
 #include <GL/glew.h>
+#include <fstream>
 
 ModuleProgram::ModuleProgram()
 {
@@ -25,6 +26,27 @@ char* ModuleProgram::LoadShaderSource(const char* shader_file_name)
 		fclose(file);
 	}
 	return data;
+}
+
+char* ModuleProgram::LoadShaderFile(const char* filePath) {
+	std::ifstream file(filePath);
+
+	if (!file.is_open()) {
+		LOG("Error: Failed to open the file: %s", filePath);
+		return nullptr;
+	}
+
+	file.seekg(0, std::ios::end);
+	size_t fileSize = file.tellg();
+	file.seekg(0, std::ios::beg);
+
+	char* fileContent = new char[fileSize + 1];
+	file.read(fileContent, fileSize);
+	file.close();
+
+	fileContent[fileSize] = '\0';
+
+	return fileContent;
 }
 
 unsigned ModuleProgram::CompileShader(unsigned type, const char* source)

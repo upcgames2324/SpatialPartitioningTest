@@ -43,7 +43,7 @@ update_status ModuleEditor::PreUpdate()
 
 update_status ModuleEditor::Update()
 {
-    ImGui::ShowDemoWindow();
+    //ImGui::ShowDemoWindow();
     
     //ImGui::Begin("Test");
     //ImGui::End();

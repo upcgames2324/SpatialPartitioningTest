@@ -1,6 +1,8 @@
 #pragma once
 #include "Module.h"
 
+class ModuleProgram;
+
 class ModuleRenderExercise : public Module
 {
 public:
@@ -19,5 +21,6 @@ public:
 
 private:
 	unsigned vbo1;
+	ModuleProgram* moduleProgram;
 };
 

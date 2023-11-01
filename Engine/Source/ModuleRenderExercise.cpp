@@ -1,8 +1,10 @@
 #include "ModuleRenderExercise.h"
+#include "ModuleProgram.h"
 #include <GL/glew.h>
 
 ModuleRenderExercise::ModuleRenderExercise()
 {
+	moduleProgram = new ModuleProgram();
 }
 
 ModuleRenderExercise::~ModuleRenderExercise()
@@ -15,7 +17,13 @@ bool ModuleRenderExercise::Init()
 	vbo1 = CreateTriangleVBO();
 
 	// Create basic vertex and fragment shader
+	char* vertex_shader = moduleProgram->LoadShaderFile("D:\\Repositories\\3D-Engine-Glew\\Engine\\Source\\shaders\\vertex_hello_world.glsl");
+	unsigned vertex_id = moduleProgram->CompileShader(GL_VERTEX_SHADER, vertex_shader);
 
+	char* fragment_shader = moduleProgram->LoadShaderFile("D:\\Repositories\\3D-Engine-Glew\\Engine\\Source\\shaders\\fragment_hello_world.glsl");
+	unsigned fragment_id = moduleProgram->CompileShader(GL_FRAGMENT_SHADER, fragment_shader);
+
+	unsigned program_id = moduleProgram->CreateProgram(vertex_id, fragment_id);
 
 	return true;
 }
@@ -40,12 +48,10 @@ update_status ModuleRenderExercise::PostUpdate()
 bool ModuleRenderExercise::CleanUp()
 {
 	LOG("Destroying renderer");
-
-	// TODO: Clean variables
+	DestroyVBO(vbo1);
 
 	return true;
 }
-
 
 // This function must be called one time at creation of vertex buffer
 unsigned ModuleRenderExercise::CreateTriangleVBO()
@@ -58,12 +64,6 @@ unsigned ModuleRenderExercise::CreateTriangleVBO()
 	return vbo;
 }
 
-// This function must be called one time at destruction of vertex buffer
-void ModuleRenderExercise::DestroyVBO(unsigned vbo)
-{
-	glDeleteBuffers(1, &vbo);
-}
-
 // This function must be called each frame for drawing the triangle
 void ModuleRenderExercise::RenderVBO(unsigned vbo)
 {
@@ -74,4 +74,10 @@ void ModuleRenderExercise::RenderVBO(unsigned vbo)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	// 1 triangle to draw = 3 vertices
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+// This function must be called one time at destruction of vertex buffer
+void ModuleRenderExercise::DestroyVBO(unsigned vbo)
+{
+	glDeleteBuffers(1, &vbo);
 }
