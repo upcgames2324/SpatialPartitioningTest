@@ -20,7 +20,7 @@ public:
 	void RenderVBO(unsigned vbo);
 
 private:
-	unsigned vbo1;
+	unsigned vbo1, program_id;
 	ModuleProgram* moduleProgram;
 };
 

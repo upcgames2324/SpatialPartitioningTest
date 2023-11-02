@@ -1,6 +1,7 @@
 #include "ModuleRenderExercise.h"
 #include "ModuleProgram.h"
 #include <GL/glew.h>
+//#include <MathGeoLib.h>
 
 ModuleRenderExercise::ModuleRenderExercise()
 {
@@ -17,13 +18,13 @@ bool ModuleRenderExercise::Init()
 	vbo1 = CreateTriangleVBO();
 
 	// Create basic vertex and fragment shader
-	char* vertex_shader = moduleProgram->LoadShaderFile("D:\\Repositories\\3D-Engine-Glew\\Engine\\Source\\shaders\\vertex_hello_world.glsl");
+	char* vertex_shader = moduleProgram->LoadShaderFile("../Source/shaders/vertex_01_modelview.glsl"); // vertex_hello_world, vertex_01_modelview
 	unsigned vertex_id = moduleProgram->CompileShader(GL_VERTEX_SHADER, vertex_shader);
 
-	char* fragment_shader = moduleProgram->LoadShaderFile("D:\\Repositories\\3D-Engine-Glew\\Engine\\Source\\shaders\\fragment_hello_world.glsl");
+	char* fragment_shader = moduleProgram->LoadShaderFile("../Source/shaders/fragment_hello_world.glsl");
 	unsigned fragment_id = moduleProgram->CompileShader(GL_FRAGMENT_SHADER, fragment_shader);
 
-	unsigned program_id = moduleProgram->CreateProgram(vertex_id, fragment_id);
+	program_id = moduleProgram->CreateProgram(vertex_id, fragment_id);
 
 	return true;
 }
@@ -67,6 +68,21 @@ unsigned ModuleRenderExercise::CreateTriangleVBO()
 // This function must be called each frame for drawing the triangle
 void ModuleRenderExercise::RenderVBO(unsigned vbo)
 {
+	// TODO: retrieve model view and projection
+	/*
+	float4x4 model = float4x4::FromTRS(float3(2.0f, 0.0f, 0.0f),
+		float4x4::RotateZ(pi / 4.0f),
+		float3(2.0f, 1.0f, 1.0f));
+	float4x4 view = LookAt(float3(0.0f, 4.0f, 8.0f), float3(0.0f, 0.0f, 0.0f), float3::unitY);
+	float4x4 proj = ComputeProjectionMatrix();
+	*/
+	glUseProgram(program_id);
+	/*
+	glUniformMatrix4fv(0, 1, GL_TRUE, &model[0][0]);
+	glUniformMatrix4fv(1, 1, GL_TRUE, &view[0][0]);
+	glUniformMatrix4fv(2, 1, GL_TRUE, &proj[0][0]);
+	*/
+
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glEnableVertexAttribArray(0);
 	// size = 3 float per vertex
@@ -81,3 +97,18 @@ void ModuleRenderExercise::DestroyVBO(unsigned vbo)
 {
 	glDeleteBuffers(1, &vbo);
 }
+
+/*
+float4x4 ComputeProjectionMatrix() {
+	Frustum frustum;
+	frustum.type = FrustumType::PerspectiveFrustum;
+	frustum.pos = float3::zero;
+	frustum.front = -float3::unitZ;
+	frustum.up = float3::unitY;
+	frustum.nearPlaneDistance = 0.1f;
+	frustum.farPlaneDistance = 100.0f;
+	frustum.verticalFov = math::pi / 4.0f;
+	frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * aspect;
+	return frustum.ProjectionMatrix();
+}
+*/

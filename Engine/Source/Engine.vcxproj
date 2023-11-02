@@ -99,7 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\SDL\include;glew-2.1.0\include;imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\SDL\include;glew-2.1.0\include;imgui;..\Externals\MathGeoLib\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,6 +142,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Externals\MathGeoLib\include\Algorithm\Random\LCG.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\AABB.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Capsule.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Circle.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Cone.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Cylinder.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Frustum.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Line.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\LineSegment.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\OBB.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Plane.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Polygon.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Polyhedron.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Ray.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Sphere.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\Triangle.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Geometry\TriangleMesh.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\BitOps.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\float2.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\float3.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\float3x3.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\float3x4.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\float4.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\float4x4.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\MathFunc.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\MathLog.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\MathOps.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\Polynomial.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\Quat.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\SSEMath.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Math\TransformOps.cpp" />
+    <ClCompile Include="..\Externals\MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="imgui\backends\imgui_impl_opengl2.cpp" />
     <ClCompile Include="imgui\backends\imgui_impl_opengl3.cpp" />
@@ -161,6 +193,66 @@
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Externals\MathGeoLib\include\Algorithm\Random\LCG.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\AABB.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\AABB2D.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Capsule.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Circle.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Cone.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Cylinder.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Frustum.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\GeometryAll.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\GeomType.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\HitInfo.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\KDTree.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Line.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\LineSegment.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\OBB.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\PBVolume.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Plane.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Polygon.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Polyhedron.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\QuadTree.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Ray.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Sphere.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\Triangle.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Geometry\TriangleMesh.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\MathBuildConfig.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\MathGeoLib.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\MathGeoLibFwd.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\assume.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\BitOps.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\Complex.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\CoordinateAxisConvention.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\FixedPoint.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\float2.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\float3.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\float3x3.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\float3x4.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\float4.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\float4x4.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\float4x4_neon.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\float4x4_sse.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\float4_neon.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\float4_sse.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\FloatCmp.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\MathAll.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\MathConstants.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\MathFunc.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\MathLog.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\MathNamespace.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\MathTypes.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\MatrixProxy.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\myassert.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\Polynomial.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\Quat.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\quat_simd.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\Rect.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\Reinterpret.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\SSEMath.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\sse_mathfun.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Math\TransformOps.h" />
+    <ClInclude Include="..\Externals\MathGeoLib\include\Time\Clock.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Dummy.h" />
     <ClInclude Include="Globals.h" />
@@ -181,6 +273,14 @@
     <ClInclude Include="ModuleProgram.h" />
     <ClInclude Include="ModuleRenderExercise.h" />
     <ClInclude Include="ModuleWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Externals\MathGeoLib\include\Geometry\KDTree.inl" />
+    <None Include="..\Externals\MathGeoLib\include\Geometry\QuadTree.inl" />
+    <None Include="..\Externals\MathGeoLib\include\Geometry\TriangleMesh_IntersectRay_AVX.inl" />
+    <None Include="..\Externals\MathGeoLib\include\Geometry\TriangleMesh_IntersectRay_CPP.inl" />
+    <None Include="..\Externals\MathGeoLib\include\Geometry\TriangleMesh_IntersectRay_SSE.inl" />
+    <None Include="..\Externals\MathGeoLib\include\Math\Matrix.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

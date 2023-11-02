@@ -34,3 +34,5 @@
 Engine/Source/.vs/
 
 Engine/Source/x64/Debug/
+
+Engine/Game/imgui.ini

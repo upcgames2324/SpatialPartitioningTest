@@ -64,15 +64,6 @@ bool ModuleOpenGL::Init()
 	glEnable(GL_SCISSOR_TEST);
 	glEnable(GL_STENCIL_TEST);
 
-	// TODO: Initialize debug options
-	#ifdef _DEBUG
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG); // Enable OpenGL debug
-		glEnable(GL_DEBUG_OUTPUT);
-		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-		//glDebugMessageCallback(&OurOpenGLErrorFunction, nullptr);
-		//glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr,true);
-	#endif
-
 	// SDL_WINDOW_OPENGL(ModuleWindow); // Already on ModuleWindow
 	context = SDL_GL_CreateContext(App->GetWindow()->window);
 	
@@ -88,6 +79,15 @@ bool ModuleOpenGL::Init()
 	glEnable(GL_DEPTH_TEST); // Enable depth test
 	glEnable(GL_CULL_FACE); // Enable cull backward faces
 	glFrontFace(GL_CCW); // Front faces will be counter clockwise
+
+	// Initialize debug options
+	#ifdef _DEBUG
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG); // Enable OpenGL debug
+		glEnable(GL_DEBUG_OUTPUT);
+		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+		glDebugMessageCallback(&OurOpenGLErrorFunction, nullptr);
+		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr,true);
+	#endif
 	
 	return true;
 }
