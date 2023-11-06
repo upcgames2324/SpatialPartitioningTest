@@ -1,7 +1,8 @@
 #include "ModuleRenderExercise.h"
 #include "ModuleProgram.h"
+#include "ModuleWindow.h"
+#include "Application.h"
 #include <GL/glew.h>
-//#include <MathGeoLib.h>
 
 ModuleRenderExercise::ModuleRenderExercise()
 {
@@ -68,20 +69,17 @@ unsigned ModuleRenderExercise::CreateTriangleVBO()
 // This function must be called each frame for drawing the triangle
 void ModuleRenderExercise::RenderVBO(unsigned vbo)
 {
-	// TODO: retrieve model view and projection
-	/*
 	float4x4 model = float4x4::FromTRS(float3(2.0f, 0.0f, 0.0f),
 		float4x4::RotateZ(pi / 4.0f),
 		float3(2.0f, 1.0f, 1.0f));
 	float4x4 view = LookAt(float3(0.0f, 4.0f, 8.0f), float3(0.0f, 0.0f, 0.0f), float3::unitY);
-	float4x4 proj = ComputeProjectionMatrix();
-	*/
+	//float4x4 view = float4x4::LookAt(float3(0.0f, 4.0f, 8.0f), float3(0.0f, 0.0f, 0.0f), float3::unitY, float3::unitY);
+	float4x4 proj = ComputeProjectionMatrix(App->GetWindow()->GetAspectRatio());
+	
 	glUseProgram(program_id);
-	/*
 	glUniformMatrix4fv(0, 1, GL_TRUE, &model[0][0]);
 	glUniformMatrix4fv(1, 1, GL_TRUE, &view[0][0]);
 	glUniformMatrix4fv(2, 1, GL_TRUE, &proj[0][0]);
-	*/
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glEnableVertexAttribArray(0);
@@ -98,8 +96,17 @@ void ModuleRenderExercise::DestroyVBO(unsigned vbo)
 	glDeleteBuffers(1, &vbo);
 }
 
-/*
-float4x4 ComputeProjectionMatrix() {
+float4x4 ModuleRenderExercise::LookAt(float3 position, float3 target, float3 up) {
+	float3 forward = (target - position).Normalized();
+	float3 right = forward.Cross(up).Normalized();
+	up = right.Cross(forward).Normalized();
+
+	float4x4 viewRotation = float4x4(float3x3(right, up, -forward)).Transposed();
+	float4x4 viewTranslation = float4x4(float3x4(float3x3::identity, position));
+	return viewRotation * viewTranslation;
+}
+
+float4x4 ModuleRenderExercise::ComputeProjectionMatrix(float aspect) {
 	Frustum frustum;
 	frustum.type = FrustumType::PerspectiveFrustum;
 	frustum.pos = float3::zero;
@@ -108,7 +115,6 @@ float4x4 ComputeProjectionMatrix() {
 	frustum.nearPlaneDistance = 0.1f;
 	frustum.farPlaneDistance = 100.0f;
 	frustum.verticalFov = math::pi / 4.0f;
-	frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * aspect;
+	frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * aspect);
 	return frustum.ProjectionMatrix();
 }
-*/

@@ -18,6 +18,8 @@ public:
 	// Called before quitting
 	bool Init();
 
+	float GetAspectRatio() const;
+
 	// Called before quitting
 	bool CleanUp();
 
