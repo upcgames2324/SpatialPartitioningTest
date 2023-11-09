@@ -19,10 +19,10 @@ bool ModuleRenderExercise::Init()
 	vbo1 = CreateTriangleVBO();
 
 	// Create basic vertex and fragment shader
-	char* vertex_shader = moduleProgram->LoadShaderFile("../Source/shaders/vertex_01_modelview.glsl"); // vertex_hello_world, vertex_01_modelview
+	char* vertex_shader = moduleProgram->LoadShaderSource("../Source/shaders/vertex_01_modelview.glsl"); // vertex_hello_world, vertex_01_modelview
 	unsigned vertex_id = moduleProgram->CompileShader(GL_VERTEX_SHADER, vertex_shader);
 
-	char* fragment_shader = moduleProgram->LoadShaderFile("../Source/shaders/fragment_hello_world.glsl");
+	char* fragment_shader = moduleProgram->LoadShaderSource("../Source/shaders/fragment_hello_world.glsl");
 	unsigned fragment_id = moduleProgram->CompileShader(GL_FRAGMENT_SHADER, fragment_shader);
 
 	program_id = moduleProgram->CreateProgram(vertex_id, fragment_id);
