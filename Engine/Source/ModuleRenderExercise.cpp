@@ -1,6 +1,7 @@
 #include "ModuleRenderExercise.h"
 #include "ModuleProgram.h"
 #include "ModuleWindow.h"
+#include "ModuleDebugDraw.h"
 #include "Application.h"
 #include <GL/glew.h>
 
@@ -91,6 +92,9 @@ void ModuleRenderExercise::RenderVBO(unsigned vbo)
 	// 1 triangle to draw = 3 vertices
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
+	// Debug drawing
+	App->GetModuleDebugDraw()->Draw(view, proj, App->GetWindow()->GetWidth(), App->GetWindow()->GetHeight());
+
 	//glPopDebugGroup();
 }
 
@@ -113,7 +117,7 @@ float4x4 ModuleRenderExercise::LookAt(float3 position, float3 target, float3 up)
 float4x4 ModuleRenderExercise::ComputeProjectionMatrix(float aspect, bool viewMatrix) {
 	Frustum frustum;
 	frustum.type = FrustumType::PerspectiveFrustum;
-	frustum.pos = float3(0.0f, 0.0f, 8.0f);
+	frustum.pos = float3(0.0f, 1.0f, 8.0f);
 	frustum.front = -float3::unitZ;
 	frustum.up = float3::unitY;
 	frustum.nearPlaneDistance = 0.1f;

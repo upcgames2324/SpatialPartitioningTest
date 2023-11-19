@@ -130,6 +130,7 @@
     <ClCompile Include="..\Externals\MathGeoLib\include\Time\Clock.cpp">
       <Filter>MathGeoLib\Time</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleDebugDraw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -352,6 +353,9 @@
     <ClInclude Include="..\Externals\MathGeoLib\include\Time\Clock.h">
       <Filter>MathGeoLib\Time</Filter>
     </ClInclude>
+    <ClInclude Include="debug_draw.hpp" />
+    <ClInclude Include="debugdraw.h" />
+    <ClInclude Include="ModuleDebugDraw.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgui">
