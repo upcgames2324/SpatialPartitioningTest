@@ -21,7 +21,7 @@ public:
 	void RenderVBO(unsigned vbo);
 
 	float4x4 LookAt(float3 position, float3 target, float3 direction);
-	float4x4 ComputeProjectionMatrix(float aspect);
+	float4x4 ComputeProjectionMatrix(float aspect, bool viewMatrix = false);
 
 private:
 	unsigned vbo1, program_id;
