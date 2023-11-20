@@ -131,6 +131,7 @@
       <Filter>MathGeoLib\Time</Filter>
     </ClCompile>
     <ClCompile Include="ModuleDebugDraw.cpp" />
+    <ClCompile Include="ModuleCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -356,6 +357,7 @@
     <ClInclude Include="debug_draw.hpp" />
     <ClInclude Include="debugdraw.h" />
     <ClInclude Include="ModuleDebugDraw.h" />
+    <ClInclude Include="ModuleCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgui">
