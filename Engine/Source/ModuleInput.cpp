@@ -2,8 +2,8 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleOpenGL.h"
-#include "SDL/include/SDL.h"
-#include "imgui/backends/imgui_impl_sdl2.h"
+#include <SDL.h>
+#include <imgui_impl_sdl2.h>
 
 ModuleInput::ModuleInput()
 {}

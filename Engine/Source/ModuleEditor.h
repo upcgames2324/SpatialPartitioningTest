@@ -1,6 +1,6 @@
 #pragma once
 #include "Module.h"
-#include "imgui/imgui.h"
+#include <imgui.h>
 
 class ImGuiContext;
 

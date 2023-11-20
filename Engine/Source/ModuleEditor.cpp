@@ -2,8 +2,8 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleOpenGL.h"
-#include "imgui/backends/imgui_impl_opengl3.h"
-#include "imgui/backends/imgui_impl_sdl2.h"
+#include <imgui_impl_opengl3.h>
+#include <imgui_impl_sdl2.h>
 
 ModuleEditor::ModuleEditor()
 {

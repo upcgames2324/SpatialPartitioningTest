@@ -99,12 +99,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\SDL\include;glew-2.1.0\include;imgui;..\Externals\MathGeoLib\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SDL\include;..\Externals\glew-2.1.0\include;..\Externals\imgui;..\Externals\imgui\backends;..\Externals\MathGeoLib\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Externals\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -175,14 +175,14 @@
     <ClCompile Include="..\Externals\MathGeoLib\include\Math\TransformOps.cpp" />
     <ClCompile Include="..\Externals\MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="imgui\backends\imgui_impl_opengl2.cpp" />
-    <ClCompile Include="imgui\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="imgui\backends\imgui_impl_sdl2.cpp" />
-    <ClCompile Include="imgui\imgui.cpp" />
-    <ClCompile Include="imgui\imgui_demo.cpp" />
-    <ClCompile Include="imgui\imgui_draw.cpp" />
-    <ClCompile Include="imgui\imgui_tables.cpp" />
-    <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\Externals\imgui\backends\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="..\Externals\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\Externals\imgui\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="..\Externals\imgui\imgui.cpp" />
+    <ClCompile Include="..\Externals\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\Externals\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\Externals\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\Externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
@@ -260,16 +260,16 @@
     <ClInclude Include="debug_draw.hpp" />
     <ClInclude Include="Dummy.h" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="imgui\backends\imgui_impl_opengl2.h" />
-    <ClInclude Include="imgui\backends\imgui_impl_opengl3.h" />
-    <ClInclude Include="imgui\backends\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="imgui\backends\imgui_impl_sdl2.h" />
-    <ClInclude Include="imgui\imconfig.h" />
-    <ClInclude Include="imgui\imgui.h" />
-    <ClInclude Include="imgui\imgui_internal.h" />
-    <ClInclude Include="imgui\imstb_rectpack.h" />
-    <ClInclude Include="imgui\imstb_textedit.h" />
-    <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClInclude Include="..\Externals\imgui\backends\imgui_impl_opengl2.h" />
+    <ClInclude Include="..\Externals\imgui\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\Externals\imgui\backends\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="..\Externals\imgui\backends\imgui_impl_sdl2.h" />
+    <ClInclude Include="..\Externals\imgui\imconfig.h" />
+    <ClInclude Include="..\Externals\imgui\imgui.h" />
+    <ClInclude Include="..\Externals\imgui\imgui_internal.h" />
+    <ClInclude Include="..\Externals\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\Externals\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\Externals\imgui\imstb_truetype.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleCamera.h" />
     <ClInclude Include="ModuleDebugDraw.h" />
