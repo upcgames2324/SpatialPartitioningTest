@@ -3,6 +3,17 @@
 
 ModuleCamera::ModuleCamera()
 {
+	this->horizontalFov = 90.0f; // DEGTORAD * 90.0f
+	this->aspectRatio = 1.3f;
+	ComputeVerticalFov();
+	this->distanceNear = 0.1f;
+	this->distanceFar = 200.0f;
+	this->position = float3(0.0f, 1.0f, -2.0f);
+	this->orientation = float3::zero;
+	this->looking = float3::zero;
+
+	this->front = float3::unitZ;
+	this->up = float3::unitY;
 }
 
 ModuleCamera::~ModuleCamera()
@@ -11,29 +22,25 @@ ModuleCamera::~ModuleCamera()
 
 bool ModuleCamera::Init()
 {
-	this->position = float3(0.0f, 1.0f, -2.0f);
-	this->planeDistances = float2(0.1f, 200.0f);
-	//this->horizontalFov = DEGTORAD * 90.0f;
-	//this->aspectRatio = 1.3f;
-
-	this->front = float3::unitZ;
-	this->up = float3::unitY;
 	return true;
 }
 
 void ModuleCamera::SetFOV(float horizontalFov)
 {
 	this->horizontalFov = horizontalFov;
+	ComputeVerticalFov();
 }
 
 void ModuleCamera::SetAspectRatio(float aspectRatio)
 {
 	this->aspectRatio = aspectRatio;
+	ComputeVerticalFov();
 }
 
-void ModuleCamera::SetPlaneDistances(float2 planeDistances)
+void ModuleCamera::SetPlaneDistances(float distanceNear, float distanceFar)
 {
-	this->planeDistances = planeDistances;
+	this->distanceNear = distanceNear;
+	this->distanceFar = distanceFar;
 }
 
 void ModuleCamera::SetPosition(float3 position)
@@ -61,10 +68,10 @@ void ModuleCamera::GetProjectionMatrix() const
 	Frustum frustum;
 	//frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
 	frustum.type = FrustumType::PerspectiveFrustum;
-	frustum.nearPlaneDistance = this->planeDistances.x;
-	frustum.farPlaneDistance = this->planeDistances.y;
-	//frustum.horizontalFov = this->horizontalFov;
-	//frustum.aspectRatio = this->aspectRatio;
+	frustum.nearPlaneDistance = this->distanceNear;
+	frustum.farPlaneDistance = this->distanceFar;
+	frustum.horizontalFov = this->horizontalFov;
+	frustum.verticalFov = this->verticalFov;
 	frustum.pos = position;
 	frustum.front = front;
 	frustum.up = up;
@@ -96,3 +103,11 @@ void ModuleCamera::GetViewMatrix() const
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(*viewGL.v);
 }
+
+void ModuleCamera::ComputeVerticalFov()
+{
+	this->verticalFov = this->horizontalFov / this->aspectRatio;
+}
+
+// TODO: Detect window resize and trigger FOV recalculation accordingly
+// SDL_WINDOWEVENT_SIZE_CHANGED

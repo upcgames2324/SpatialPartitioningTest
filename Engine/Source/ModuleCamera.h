@@ -12,18 +12,23 @@ public:
 
 	void SetFOV(float horizontalFov);
 	void SetAspectRatio(float aspectRatio);
-	void SetPlaneDistances(float2 planeDistances);
+	void SetPlaneDistances(float distanceNear, float distanceFar);
 	void SetPosition(float3 position);
 	void SetOrientation(float3 orientation);
-	void LookAt(float x, float y, float z);
 	void LookAt(float3 looking);
+	void LookAt(float x, float y, float z);
 	void GetProjectionMatrix() const;
 	void GetViewMatrix() const;
 
 private:
+	void ComputeVerticalFov();
+
+private:
 	float horizontalFov;
+	float verticalFov;
 	float aspectRatio;
-	float2 planeDistances;
+	float distanceNear;
+	float distanceFar;
 	float3 position;
 	float3 orientation;
 	float3 looking;
