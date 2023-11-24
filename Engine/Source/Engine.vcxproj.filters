@@ -126,6 +126,7 @@
     <ClCompile Include="..\Externals\imgui\backends\imgui_impl_opengl2.cpp" />
     <ClCompile Include="..\Externals\imgui\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\Externals\imgui\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="ModuleTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -344,6 +345,7 @@
     <ClInclude Include="..\Externals\imgui\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="..\Externals\imgui\backends\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="..\Externals\imgui\backends\imgui_impl_sdl2.h" />
+    <ClInclude Include="ModuleTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgui">
@@ -384,5 +386,6 @@
     <None Include="..\Externals\MathGeoLib\include\Math\Matrix.inl">
       <Filter>MathGeoLib\Math</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
