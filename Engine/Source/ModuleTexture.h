@@ -1,8 +1,10 @@
 #pragma once
 #include "Module.h"
+#include "DirectXTex.h"
 
 class ModuleTexture : public Module
 {
+public:
 	ModuleTexture();
 	~ModuleTexture();
 
@@ -12,9 +14,12 @@ class ModuleTexture : public Module
 	update_status PostUpdate();
 	bool CleanUp();
 
-	void LoadTexture(string& path);
+	void LoadTexture(const wchar_t* file);
 
 private:
+	DirectX::TexMetadata info;
+	DirectX::ScratchImage image;
 
+	int internalFormat, format, type;
+	unsigned texture1;
 };
-

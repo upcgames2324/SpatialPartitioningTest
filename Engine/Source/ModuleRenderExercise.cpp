@@ -2,6 +2,7 @@
 #include "ModuleProgram.h"
 #include "ModuleWindow.h"
 #include "ModuleDebugDraw.h"
+#include "ModuleTexture.h"
 #include "Application.h"
 #include <GL/glew.h>
 
@@ -18,6 +19,7 @@ bool ModuleRenderExercise::Init()
 {
 	LOG("Creating triangle exercise");
 	vbo1 = CreateTriangleVBO();
+	App->GetModuleTexture()->LoadTexture(L"../Models/Textures/Test-image-Baboon.ppm");
 
 	// Create basic vertex and fragment shader
 	char* vertex_shader = moduleProgram->LoadShaderSource("../Source/shaders/vertex_01_modelview.glsl"); // vertex_hello_world, vertex_01_modelview
@@ -59,7 +61,15 @@ bool ModuleRenderExercise::CleanUp()
 // This function must be called one time at creation of vertex buffer
 unsigned ModuleRenderExercise::CreateTriangleVBO()
 {
-	float vtx_data[] = { -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f };
+	float vtx_data[] = {
+		-1.0f, -1.0f, 0.0f,
+		1.0f, -1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f,
+		
+		0.0f, 1.0f,
+		1.0f, 1.0f,
+		0.5f, 0.0f
+	};
 	unsigned vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo); // set vbo active
@@ -89,6 +99,14 @@ void ModuleRenderExercise::RenderVBO(unsigned vbo)
 	// size = 3 float per vertex
 	// stride = 0 is equivalent to stride = sizeof(float)*3
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	// Textures
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0,
+		(void*)(sizeof(float) * 3 * 3) // buffer offset
+	);
+	//glActiveTexture(GL_TEXTURE5);
+	//glBindTexture(GL_TEXTURE_2D, texture_object);
+	
 	// 1 triangle to draw = 3 vertices
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
