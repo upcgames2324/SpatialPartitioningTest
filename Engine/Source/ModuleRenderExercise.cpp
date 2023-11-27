@@ -19,13 +19,13 @@ bool ModuleRenderExercise::Init()
 {
 	LOG("Creating triangle exercise");
 	vbo1 = CreateTriangleVBO();
-	App->GetModuleTexture()->LoadTexture(L"../Models/Textures/Test-image-Baboon.ppm");
+	App->GetModuleTexture()->LoadTexture(L"./Textures/Test-image-Baboon.jpg");
 
 	// Create basic vertex and fragment shader
-	char* vertex_shader = moduleProgram->LoadShaderSource("../Source/shaders/vertex_01_modelview.glsl"); // vertex_hello_world, vertex_01_modelview
+	char* vertex_shader = moduleProgram->LoadShaderSource("../Source/shaders/vertex_02_textures.glsl"); // vertex_hello_world, vertex_01_modelview
 	unsigned vertex_id = moduleProgram->CompileShader(GL_VERTEX_SHADER, vertex_shader);
 
-	char* fragment_shader = moduleProgram->LoadShaderSource("../Source/shaders/fragment_hello_world.glsl");
+	char* fragment_shader = moduleProgram->LoadShaderSource("../Source/shaders/fragment_02_textures.glsl");
 	unsigned fragment_id = moduleProgram->CompileShader(GL_FRAGMENT_SHADER, fragment_shader);
 
 	program_id = moduleProgram->CreateProgram(vertex_id, fragment_id);
@@ -105,7 +105,7 @@ void ModuleRenderExercise::RenderVBO(unsigned vbo)
 		(void*)(sizeof(float) * 3 * 3) // buffer offset
 	);
 	//glActiveTexture(GL_TEXTURE5);
-	//glBindTexture(GL_TEXTURE_2D, texture_object);
+	//glBindTexture(GL_TEXTURE_2D, App->GetModuleTexture()->texture1);
 	
 	// 1 triangle to draw = 3 vertices
 	glDrawArrays(GL_TRIANGLES, 0, 3);

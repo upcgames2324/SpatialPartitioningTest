@@ -12,22 +12,22 @@ ModuleTexture::~ModuleTexture()
 
 bool ModuleTexture::Init()
 {
-	return false;
+	return true;
 }
 
 update_status ModuleTexture::PreUpdate()
 {
-	return update_status();
+	return UPDATE_CONTINUE;
 }
 
 update_status ModuleTexture::Update()
 {
-	return update_status();
+	return UPDATE_CONTINUE;
 }
 
 update_status ModuleTexture::PostUpdate()
 {
-	return update_status();
+	return UPDATE_CONTINUE;
 }
 
 bool ModuleTexture::CleanUp()
