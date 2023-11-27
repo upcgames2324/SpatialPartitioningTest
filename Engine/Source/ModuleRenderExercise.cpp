@@ -19,7 +19,7 @@ bool ModuleRenderExercise::Init()
 {
 	LOG("Creating triangle exercise");
 	vbo1 = CreateTriangleVBO();
-	App->GetModuleTexture()->LoadTexture(L"./Textures/Test-image-Baboon.jpg");
+	App->GetModuleTexture()->LoadTexture(L"./Textures/Test-image-Baboon.ppm");
 
 	// Create basic vertex and fragment shader
 	char* vertex_shader = moduleProgram->LoadShaderSource("../Source/shaders/vertex_02_textures.glsl"); // vertex_hello_world, vertex_01_modelview
@@ -64,11 +64,17 @@ unsigned ModuleRenderExercise::CreateTriangleVBO()
 	float vtx_data[] = {
 		-1.0f, -1.0f, 0.0f,
 		1.0f, -1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
+		-1.0f, 1.0f, 0.0f,
+		-1.0f, 1.0f, 0.0f,
+		1.0f, -1.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
 		
 		0.0f, 1.0f,
 		1.0f, 1.0f,
-		0.5f, 0.0f
+		0.0f, 0.0f,
+		0.0f, 0.0f,
+		1.0f, 1.0f,
+		1.0f, 0.0f,
 	};
 	unsigned vbo;
 	glGenBuffers(1, &vbo);
@@ -81,7 +87,7 @@ unsigned ModuleRenderExercise::CreateTriangleVBO()
 // This function must be called each frame for drawing the triangle
 void ModuleRenderExercise::RenderVBO(unsigned vbo)
 {
-	float4x4 model = float4x4::FromTRS(float3(2.0f, 0.0f, 0.0f), float4x4::RotateZ(pi / 4.0f), float3(2.0f, 1.0f, 1.0f));
+	float4x4 model = float4x4::identity;//float4x4::FromTRS(float3(2.0f, 0.0f, 0.0f), float4x4::RotateZ(pi / 4.0f), float3(2.0f, 1.0f, 1.0f));
 	float4x4 view1 = LookAt(float3(0.0f, 0.0f, 8.0f), float3(0.0f, 0.0f, 0.0f), float3::unitY);
 	float4x4 view2 = float4x4::LookAt(float3(0.0f, 0.0f, 8.0f), float3(0.0f, 0.0f, 0.0f), float3::unitY, float3::unitY);
 	float4x4 view = ComputeProjectionMatrix(App->GetWindow()->GetAspectRatio(), true);
@@ -102,13 +108,13 @@ void ModuleRenderExercise::RenderVBO(unsigned vbo)
 	// Textures
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0,
-		(void*)(sizeof(float) * 3 * 3) // buffer offset
+		(void*)(sizeof(float) * 3 * 6) // buffer offset
 	);
 	//glActiveTexture(GL_TEXTURE5);
 	//glBindTexture(GL_TEXTURE_2D, App->GetModuleTexture()->texture1);
 	
 	// 1 triangle to draw = 3 vertices
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 
 	// Debug drawing
 	App->GetModuleDebugDraw()->Draw(view, proj, App->GetWindow()->GetWidth(), App->GetWindow()->GetHeight());
