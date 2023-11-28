@@ -99,7 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>SDL\include;..\Externals\glew-2.1.0\include;..\Externals\imgui;..\Externals\imgui\backends;..\Externals\MathGeoLib\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SDL\include;..\Externals\glew-2.1.0\include;..\Externals\imgui;..\Externals\imgui\backends;..\Externals\MathGeoLib\include;..\Externals\tinygltf-2.8.18</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -256,6 +256,10 @@
     <ClInclude Include="..\Externals\MathGeoLib\include\Math\sse_mathfun.h" />
     <ClInclude Include="..\Externals\MathGeoLib\include\Math\TransformOps.h" />
     <ClInclude Include="..\Externals\MathGeoLib\include\Time\Clock.h" />
+    <ClInclude Include="..\Externals\tinygltf-2.8.18\json.hpp" />
+    <ClInclude Include="..\Externals\tinygltf-2.8.18\stb_image.h" />
+    <ClInclude Include="..\Externals\tinygltf-2.8.18\stb_image_write.h" />
+    <ClInclude Include="..\Externals\tinygltf-2.8.18\tiny_gltf.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="debugdraw.h" />
     <ClInclude Include="debug_draw.hpp" />
