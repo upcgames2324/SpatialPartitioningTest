@@ -133,6 +133,12 @@
     <ClCompile Include="..\Externals\imgui\backends\imgui_impl_sdl2.cpp">
       <Filter>imgui\impl</Filter>
     </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Assets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -372,6 +378,12 @@
     <ClInclude Include="..\Externals\tinygltf-2.8.18\stb_image_write.h">
       <Filter>tinygltf</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Assets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgui">
@@ -397,6 +409,9 @@
     </Filter>
     <Filter Include="tinygltf">
       <UniqueIdentifier>{0ded059a-cea9-494c-8fce-5dc81d96e01f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{d325224c-4cd2-4cae-b534-43c4e01394e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

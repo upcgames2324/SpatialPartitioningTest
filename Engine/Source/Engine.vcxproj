@@ -185,6 +185,8 @@
     <ClCompile Include="..\Externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="ModuleDebugDraw.cpp" />
     <ClCompile Include="ModuleEditor.cpp" />
@@ -275,6 +277,8 @@
     <ClInclude Include="..\Externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\Externals\imgui\imstb_textedit.h" />
     <ClInclude Include="..\Externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleCamera.h" />
     <ClInclude Include="ModuleDebugDraw.h" />
