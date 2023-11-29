@@ -14,7 +14,7 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	void LoadTexture(const wchar_t* file);
+	unsigned LoadTexture(const wchar_t* file);
 
 private:
 	DirectX::TexMetadata info;

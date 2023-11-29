@@ -37,7 +37,7 @@ bool ModuleTexture::CleanUp()
 	return true;
 }
 
-void ModuleTexture::LoadTexture(const wchar_t* file)
+unsigned ModuleTexture::LoadTexture(const wchar_t* file)
 {
 	// auto image = std::make_unique<DirectX::ScratchImage>();
 	HRESULT hr = DirectX::LoadFromDDSFile(file,
@@ -89,4 +89,5 @@ void ModuleTexture::LoadTexture(const wchar_t* file)
 		glTexImage2D(GL_TEXTURE_2D, i, internalFormat, mip->width, mip->height, 0, format, type, mip->pixels);
 	}
 
+	return texture1;
 }

@@ -6,6 +6,8 @@
 
 #include "Model.h"
 #include "Mesh.h"
+#include "Application.h"
+#include "ModuleTexture.h"
 #include "Globals.h"
 
 void Model::Load(const char* assetFileName)
@@ -26,6 +28,23 @@ void Model::Load(const char* assetFileName)
 		{
 			Mesh* mesh = new Mesh;
 			mesh->Load(gltfmodel, gltfMesh, primitive);
+			meshes.push_back(mesh);
 		}
+	}
+}
+
+void Model::LoadMaterials(const tinygltf::Model& srcModel)
+{
+	for (const auto& srcMaterial : srcModel.materials)
+	{
+		unsigned int textureId = 0;
+		if (srcMaterial.pbrMetallicRoughness.baseColorTexture.index >= 0)
+		{
+			const tinygltf::Texture& texture = srcModel.textures[srcMaterial.pbrMetallicRoughness.baseColorTexture.index];
+			const tinygltf::Image& image = srcModel.images[texture.source];
+			const wchar_t* imageUri = std::wstring(image.uri.begin(), image.uri.end()).c_str();
+			textureId = App->GetModuleTexture()->LoadTexture(imageUri);
+		}
+		textures.push_back(textureId);
 	}
 }
