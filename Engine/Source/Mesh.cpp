@@ -39,22 +39,29 @@ void Mesh::Load(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive 
 	if (primitive.indices >= 0)
 	{
 		const tinygltf::Accessor& indAcc = model.accessors[primitive.indices];
+		const tinygltf::BufferView& indView = model.bufferViews[indAcc.bufferView];
 		indexCount = indAcc.count;
 		glGenBuffers(1, &ebo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indAcc.count, nullptr, GL_STATIC_DRAW);
 		unsigned int* ptr = reinterpret_cast<unsigned int*>(glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY));
-		const tinygltf::Accessor& indAcc = model.accessors[primitive.indices];
-		const tinygltf::BufferView& indView = model.bufferViews[indAcc.bufferView];
 		const unsigned char* buffer = &(model.buffers[indView.buffer].data[indAcc.byteOffset +
 			indView.byteOffset]);
 		if (indAcc.componentType == TINYGLTF_PARAMETER_TYPE_UNSIGNED_INT)
 		{
-			const uint32_t* bufferInd = reinterpret_cast<const int32_t*>(buffer);
+			const uint32_t* bufferInd = reinterpret_cast<const uint32_t*>(buffer);
 			for (uint32_t i = 0; i < indexCount; ++i) ptr[i] = bufferInd[i];
 		}
-		/* TODO indAcc.componentType == TINYGLTF_PARAMETER_TYPE_UNSIGNED_SHORT*/
-		/* TODO indAcc.componentType == TINYGLTF_PARAMETER_TYPE_UNSIGNED_BYTE*/
+		if (indAcc.componentType == TINYGLTF_PARAMETER_TYPE_UNSIGNED_SHORT)
+		{
+			const uint_least16_t* bufferInd = reinterpret_cast<const uint_least16_t*>(buffer);
+			for (uint_least16_t i = 0; i < indexCount; ++i) ptr[i] = bufferInd[i];
+		}
+		if (indAcc.componentType == TINYGLTF_PARAMETER_TYPE_UNSIGNED_BYTE)
+		{
+			const uint8_t* bufferInd = reinterpret_cast<const uint8_t*>(buffer);
+			for (uint8_t i = 0; i < indexCount; ++i) ptr[i] = bufferInd[i];
+		}
 		glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
 	}
 }
