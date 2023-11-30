@@ -45,8 +45,8 @@ update_status ModuleEditor::Update()
 {
     //ImGui::ShowDemoWindow();
     
-    //ImGui::Begin("Test");
-    //ImGui::End();
+    //ShowUpperMenu();
+    //ShowWindowConsole();
 
     // Render frame before swapping buffers (OpenGL PostUpdate)
     ImGui::Render();
@@ -67,4 +67,45 @@ bool ModuleEditor::CleanUp()
     ImGui::DestroyContext();
 
 	return true;
+}
+
+void ModuleEditor::AddLog(const char* log)
+{
+    logs.push_back(log);
+}
+
+void ModuleEditor::ShowUpperMenu() const
+{
+    if (ImGui::BeginMainMenuBar())
+    {
+        if (ImGui::BeginMenu("Help"))
+        {
+            if (ImGui::MenuItem("Github")) {
+                //Navigate("https://github.com/Bermellet/3D-Engine-Glew");
+            }
+
+            if (ImGui::MenuItem("About")) {
+                ImGui::Text("Engine ..."); // TODO
+                ImGui::Text("3D Engine using OpenGL");
+                ImGui::Text("By Jordi Nieto (Bermellet)");
+                ImGui::Separator();
+                ImGui::Text("Libraries: OpenGL, SDL, Glew, MathGeoLib, ImGui, tinygltf"); // TODO
+                ImGui::Separator();
+                ImGui::Text("GNU GENERAL PUBLIC LICENSE");
+            }
+
+            ImGui::EndMenu();
+        }
+        ImGui::EndMainMenuBar();
+    }
+}
+
+void ModuleEditor::ShowWindowConsole() const {
+    ImGui::Begin("Console");
+
+    for (const char* log : logs) {
+        ImGui::TextUnformatted(log);
+    }
+
+    ImGui::End();
 }

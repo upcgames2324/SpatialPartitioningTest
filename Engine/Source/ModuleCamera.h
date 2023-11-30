@@ -1,6 +1,6 @@
 #pragma once
 #include "Module.h"
-#include "MathGeoLib.h"
+#include "Math/float3.h"
 
 class ModuleCamera : public Module
 {

@@ -4,6 +4,7 @@
 #include "ModuleDebugDraw.h"
 #include "ModuleTexture.h"
 #include "Application.h"
+#include "MathGeoLib.h"
 #include <GL/glew.h>
 
 ModuleRenderExercise::ModuleRenderExercise()

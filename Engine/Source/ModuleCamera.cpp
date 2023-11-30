@@ -1,4 +1,5 @@
 #include "ModuleCamera.h"
+#include "MathGeoLib.h"
 #include <GL/glew.h>
 
 ModuleCamera::ModuleCamera()

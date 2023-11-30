@@ -1,6 +1,5 @@
 #pragma once
 
-#include<list>
 #include "Globals.h"
 #include "Module.h"
 
@@ -28,6 +27,7 @@ public:
     ModuleOpenGL* GetOpenGL() { return render; }
     ModuleWindow* GetWindow() { return window; }
     ModuleInput* GetInput() { return input; }
+    ModuleEditor* GetModuleEditor() { return editor; }
     ModuleDebugDraw*  GetModuleDebugDraw() { return debugDraw; }
     ModuleTexture* GetModuleTexture() { return moduleTexture; }
 
@@ -42,7 +42,7 @@ private:
     ModuleCamera* moduleCamera = nullptr;
     ModuleTexture* moduleTexture = nullptr;
 
-    std::list<Module*> modules;
+    std::vector<Module*> modules;
 
 };
 
