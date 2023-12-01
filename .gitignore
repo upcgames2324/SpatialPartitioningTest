@@ -12,19 +12,19 @@
 *.pch
 
 # Compiled Dynamic libraries
+#*.dll
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
 *.smod
 
 # Compiled Static libraries
+#*.lib
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
