@@ -20,8 +20,8 @@ public:
 	void SetOrientation(float3 orientation);
 	void LookAt(float3 looking);
 	void LookAt(float x, float y, float z);
-	void GetProjectionMatrix() const;
-	void GetViewMatrix() const;
+	float4x4 GetProjectionMatrix() const;
+	float4x4 GetViewMatrix() const;
 
 	void RotateAngle(const float3& axis, const float angle);
 

@@ -3,6 +3,7 @@
 #include "ModuleWindow.h"
 #include "ModuleDebugDraw.h"
 #include "ModuleTexture.h"
+#include "ModuleCamera.h"
 #include "Application.h"
 #include "MathGeoLib.h"
 #include <GL/glew.h>
@@ -89,10 +90,8 @@ unsigned ModuleRenderExercise::CreateTriangleVBO()
 void ModuleRenderExercise::RenderVBO(unsigned vbo)
 {
 	float4x4 model = float4x4::identity;//float4x4::FromTRS(float3(2.0f, 0.0f, 0.0f), float4x4::RotateZ(pi / 4.0f), float3(2.0f, 1.0f, 1.0f));
-	float4x4 view1 = LookAt(float3(0.0f, 0.0f, 8.0f), float3(0.0f, 0.0f, 0.0f), float3::unitY);
-	float4x4 view2 = float4x4::LookAt(float3(0.0f, 0.0f, 8.0f), float3(0.0f, 0.0f, 0.0f), float3::unitY, float3::unitY);
-	float4x4 view = ComputeProjectionMatrix(App->GetWindow()->GetAspectRatio(), true);
-	float4x4 proj = ComputeProjectionMatrix(App->GetWindow()->GetAspectRatio(), false);
+	float4x4 view = App->GetModuleCamera()->GetViewMatrix();
+	float4x4 proj = App->GetModuleCamera()->GetProjectionMatrix();
 	
 	//glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, -1, "Render Quad");
 
@@ -137,21 +136,4 @@ float4x4 ModuleRenderExercise::LookAt(float3 position, float3 target, float3 up)
 	float4x4 viewRotation = float4x4(float3x3(right, up, -forward)).Transposed();
 	float4x4 viewTranslation = float4x4(float3x4(float3x3::identity, position));
 	return viewRotation * viewTranslation;
-}
-
-float4x4 ModuleRenderExercise::ComputeProjectionMatrix(float aspect, bool viewMatrix) {
-	Frustum frustum;
-	frustum.type = FrustumType::PerspectiveFrustum;
-	frustum.pos = float3(0.0f, 1.0f, 8.0f);
-	frustum.front = -float3::unitZ;
-	frustum.up = float3::unitY;
-	frustum.nearPlaneDistance = 0.1f;
-	frustum.farPlaneDistance = 100.0f;
-	frustum.verticalFov = math::pi / 4.0f;
-	frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * aspect);
-
-	if (viewMatrix) {
-		return frustum.ViewMatrix();
-	}
-	return frustum.ProjectionMatrix();
 }

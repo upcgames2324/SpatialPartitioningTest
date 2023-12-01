@@ -29,6 +29,7 @@ public:
     ModuleInput* GetInput() { return input; }
     ModuleEditor* GetModuleEditor() { return editor; }
     ModuleDebugDraw*  GetModuleDebugDraw() { return debugDraw; }
+    ModuleCamera* GetModuleCamera() { return moduleCamera; }
     ModuleTexture* GetModuleTexture() { return moduleTexture; }
 
 private:

@@ -15,15 +15,15 @@ public:
 	// Destructor
 	virtual ~ModuleWindow();
 
-	// Called before quitting
 	bool Init();
+	update_status PreUpdate();
+	bool CleanUp();
 
 	int GetWidth() const;
 	int GetHeight() const;
 	float GetAspectRatio() const;
 
-	// Called before quitting
-	bool CleanUp();
+	void WindowResized(unsigned width, unsigned height);
 
 public:
 	//The window we'll be rendering to

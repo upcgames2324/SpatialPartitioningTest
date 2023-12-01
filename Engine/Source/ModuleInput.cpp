@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include "ModuleWindow.h"
 #include "ModuleOpenGL.h"
 #include <SDL.h>
 #include <imgui_impl_sdl2.h>
@@ -71,33 +72,43 @@ update_status ModuleInput::PreUpdate()
 	}
 	while(SDL_PollEvent(&event) != 0)
 	{
+		ImGui_ImplSDL2_ProcessEvent(&event);
 		switch(event.type)
 		{
-			/*
 			case SDL_QUIT:
-				windowEvents[WE_QUIT] = true;
+				return UPDATE_STOP;
+				//windowEvents[WE_QUIT] = true;
 			break;
 
 			case SDL_WINDOWEVENT:
 				switch(event.window.event)
 				{
-					//case SDL_WINDOWEVENT_LEAVE:
+					case SDL_WINDOWEVENT_LEAVE:
 					case SDL_WINDOWEVENT_HIDDEN:
 					case SDL_WINDOWEVENT_MINIMIZED:
 					case SDL_WINDOWEVENT_FOCUS_LOST:
-					windowEvents[WE_HIDE] = true;
+						// TODO
+						//windowEvents[WE_HIDE] = true;
 					break;
 
-					//case SDL_WINDOWEVENT_ENTER:
+					case SDL_WINDOWEVENT_ENTER:
 					case SDL_WINDOWEVENT_SHOWN:
 					case SDL_WINDOWEVENT_FOCUS_GAINED:
 					case SDL_WINDOWEVENT_MAXIMIZED:
 					case SDL_WINDOWEVENT_RESTORED:
-					windowEvents[WE_SHOW] = true;
+						// TODO
+						//windowEvents[WE_SHOW] = true;
+					break;
+
+					case SDL_WINDOWEVENT_RESIZED:
+					case SDL_WINDOWEVENT_SIZE_CHANGED:
+						App->GetWindow()->WindowResized(event.window.data1, event.window.data2);
+					break;
+					case SDL_WINDOWEVENT_CLOSE:
+						return UPDATE_STOP;
 					break;
 				}
 			break;
-			*/
 
 			case SDL_MOUSEBUTTONDOWN:
 				mouse_buttons[event.button.button - 1] = KEY_DOWN;
@@ -126,22 +137,6 @@ update_status ModuleInput::PreUpdate()
 // Called every draw update
 update_status ModuleInput::Update()
 {
-    SDL_Event sdlEvent;
-
-    while (SDL_PollEvent(&sdlEvent) != 0)
-    {
-        ImGui_ImplSDL2_ProcessEvent(&sdlEvent);
-        switch (sdlEvent.type)
-        {
-            case SDL_QUIT:
-                return UPDATE_STOP;
-            case SDL_WINDOWEVENT:
-                if (sdlEvent.window.event == SDL_WINDOWEVENT_RESIZED || sdlEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
-                    App->GetOpenGL()->WindowResized(sdlEvent.window.data1, sdlEvent.window.data2);
-                break;
-        }
-    }
-
     return UPDATE_CONTINUE;
 }
 

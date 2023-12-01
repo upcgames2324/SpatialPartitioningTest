@@ -94,12 +94,6 @@ bool ModuleOpenGL::Init()
 
 update_status ModuleOpenGL::PreUpdate()
 {
-	int w, h;
-	SDL_GetWindowSize(App->GetWindow()->window, &w, &h);
-	glViewport(0, 0, w, h);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	return UPDATE_CONTINUE;
 }
 
@@ -126,10 +120,6 @@ bool ModuleOpenGL::CleanUp()
 	SDL_GL_DeleteContext(App->GetWindow()->window);
 
 	return true;
-}
-
-void ModuleOpenGL::WindowResized(unsigned width, unsigned height)
-{
 }
 
 SDL_GLContext ModuleOpenGL::getContext()

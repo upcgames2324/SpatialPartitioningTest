@@ -1,6 +1,9 @@
 #include "Globals.h"
 #include "Application.h"
+#include "ModuleCamera.h"
 #include "ModuleWindow.h"
+#include "SDL.h"
+#include <GL/glew.h>
 
 ModuleWindow::ModuleWindow()
 {
@@ -52,6 +55,17 @@ bool ModuleWindow::Init()
 	return ret;
 }
 
+update_status ModuleWindow::PreUpdate()
+{
+	int w, h;
+	SDL_GetWindowSize(window, &w, &h);
+	glViewport(0, 0, w, h);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	return UPDATE_CONTINUE;
+}
+
 int ModuleWindow::GetWidth() const
 {
 	SDL_DisplayMode DM;
@@ -88,3 +102,8 @@ bool ModuleWindow::CleanUp()
 	return true;
 }
 
+void ModuleWindow::WindowResized(unsigned width, unsigned height)
+{
+	glViewport(0, 0, width, height);
+	App->GetModuleCamera()->SetAspectRatio((float)width / (float)height);
+}
