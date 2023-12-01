@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Math/float3.h"
+#include "Geometry/Frustum.h"
 
 class ModuleCamera : public Module
 {
@@ -9,6 +10,8 @@ public:
 	~ModuleCamera();
 
 	bool Init();
+	update_status Update();
+	bool CleanUp();
 
 	void SetFOV(float horizontalFov);
 	void SetAspectRatio(float aspectRatio);
@@ -20,19 +23,15 @@ public:
 	void GetProjectionMatrix() const;
 	void GetViewMatrix() const;
 
+	void RotateAngle(const float3& axis, const float angle);
+
 private:
 	void ComputeVerticalFov();
+	void CheckInputs();
 
 private:
-	float horizontalFov;
-	float verticalFov;
-	float aspectRatio;
-	float distanceNear;
-	float distanceFar;
-	float3 position;
+	Frustum frustum;
 	float3 orientation;
 	float3 looking;
-
-	float3 front;
-	float3 up;
+	float aspectRatio;
 };
