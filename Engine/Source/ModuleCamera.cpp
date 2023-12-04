@@ -87,16 +87,16 @@ void ModuleCamera::LookAt(float x, float y, float z)
 float4x4 ModuleCamera::GetProjectionMatrix() const
 {
 	float4x4 projectionGL = frustum.ProjectionMatrix();
-	glMatrixMode(GL_PROJECTION); // TODO: check uniform assign
-	glLoadMatrixf(*projectionGL.Transposed().v);
+	//glMatrixMode(GL_PROJECTION); // TODO: check uniform assign
+	//glLoadMatrixf(*projectionGL.Transposed().v);
 	return projectionGL;
 }
 
 float4x4 ModuleCamera::GetViewMatrix() const
 {
 	float4x4 viewGL = float4x4(frustum.ViewMatrix());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(*viewGL.Transposed().v);
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadMatrixf(*viewGL.Transposed().v);
 	return viewGL;
 }
 

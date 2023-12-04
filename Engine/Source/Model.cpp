@@ -55,6 +55,7 @@ void Model::Draw(const unsigned programId) const
 {
 	for (int i = 0; i < meshes.size(); ++i)
 	{
-		meshes[i]->Draw(programId, textures[i]);
+		unsigned textureId = (textures.size() > i) ? i : 0;
+		meshes[i]->Draw(programId, textureId);
 	}
 }

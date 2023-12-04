@@ -8,6 +8,18 @@
 #include <GL/glew.h>
 #include <SDL_assert.h>
 
+Mesh::Mesh()
+{
+	vao = vbo = ebo = 0;
+	vertexCount = indexCount = 0;
+	interleavedVertices = false;
+}
+
+Mesh::~Mesh()
+{
+
+}
+
 void Mesh::Load(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive primitive)
 {
 	const auto& itPos = primitive.attributes.find("POSITION");
@@ -22,18 +34,18 @@ void Mesh::Load(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive 
 		vertexCount = posAcc.count;
 
 		// No byte stride
-		//glGenBuffers(1, &vbo);
-		//glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3 * posAcc.count, bufferPos, GL_STATIC_DRAW);
+		glGenBuffers(1, &vbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3 * posAcc.count, bufferPos, GL_STATIC_DRAW);
 
 		// Using byte stride
-		glGenBuffers(1, &vbo);
+		/*glGenBuffers(1, &vbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3 * posAcc.count, nullptr, GL_STATIC_DRAW);
 		float3* ptr = reinterpret_cast<float3*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
 		for (size_t i = 0; i < posAcc.count; ++i)
 		{
 			ptr[i] = *reinterpret_cast<const float3*>(bufferPos);
 			bufferPos += posView.byteStride;
-		}
+		}*/
 		glUnmapBuffer(GL_ARRAY_BUFFER);
 	}
 	if (primitive.indices >= 0)
@@ -64,12 +76,14 @@ void Mesh::Load(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive 
 		}
 		glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
 	}
+
+	CreateVAO(interleavedVertices);
 	// TODO: material load and save materialIndex
 }
 
 void Mesh::RenderInterleaved(const unsigned programId) const
 {
-	glUseProgram(programId); // TODO
+	glUseProgram(programId);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3 + sizeof(float) * 2, (void*)0);
@@ -102,16 +116,25 @@ void Mesh::RenderEBO()
 }
 */
 
-void Mesh::CreateVAO()
+void Mesh::CreateVAO(bool interleaved)
 {
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	if (interleaved) {
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3 + sizeof(float) * 2, (void*)0);
+	} else {
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	}
+
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 3 * vertexCount));
+	if (interleaved) {
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 3 + sizeof(float) * 2, (void*)(sizeof(float) * 3));
+	} else {
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 3 * vertexCount));
+	}
 	glBindVertexArray(0);
 }
 
@@ -124,5 +147,13 @@ void Mesh::Draw(const unsigned programId, const unsigned textureId) const
 	glUniform1i(glGetUniformLocation(programId, "diffuse"), 0);
 
 	glBindVertexArray(vao);
-	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
+	size_t verticesToPrint = (indexCount == 0) ? vertexCount : indexCount;
+	glDrawElements(GL_TRIANGLES, verticesToPrint, GL_UNSIGNED_INT, nullptr);
+
+	if (interleavedVertices) {
+		RenderInterleaved(programId);
+	}
+	else {
+		RenderSeparated(programId);
+	}
 }

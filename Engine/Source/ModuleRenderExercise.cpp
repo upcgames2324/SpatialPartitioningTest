@@ -26,7 +26,7 @@ bool ModuleRenderExercise::Init()
 
 	// Loading models
 	Model* model1 = new Model();
-	model1->Load("./Models/SampleModels/TriangleWithoutIndices.gltf");
+	model1->Load("./Models/SampleModels/TriangleIndices.gltf");// SampleModels/TriangleWithoutIndices.gltf, Box.gltf, /BakerHouse/BakerHouse.gltf
 	models.push_back(model1);
 
 	// Create basic vertex and fragment shader
@@ -59,15 +59,16 @@ update_status ModuleRenderExercise::Update()
 	glUniformMatrix4fv(0, 1, GL_TRUE, &model[0][0]);
 	glUniformMatrix4fv(1, 1, GL_TRUE, &view[0][0]);
 	glUniformMatrix4fv(2, 1, GL_TRUE, &proj[0][0]);
-
-	App->GetModuleDebugDraw()->Draw(view, proj, App->GetWindow()->GetWidth(), App->GetWindow()->GetHeight());
-	//
 	
 	for (const Model* model : models)
 	{
 		model->Draw(program_id);
 	}
-
+	
+	// TODO: QUIT
+	App->GetModuleDebugDraw()->Draw(view, proj, App->GetWindow()->GetWidth(), App->GetWindow()->GetHeight());
+	//
+	
 	return UPDATE_CONTINUE;
 }
 
