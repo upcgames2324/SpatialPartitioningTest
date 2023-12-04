@@ -64,9 +64,10 @@ void Mesh::Load(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive 
 		}
 		glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
 	}
+	// TODO: material load and save materialIndex
 }
 
-void Mesh::RenderInterleaved() const
+void Mesh::RenderInterleaved(const unsigned programId) const
 {
 	glUseProgram(programId); // TODO
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -77,7 +78,7 @@ void Mesh::RenderInterleaved() const
 	glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 }
 
-void Mesh::RenderSeparated() const
+void Mesh::RenderSeparated(const unsigned programId) const
 {
 	glUseProgram(programId);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -114,12 +115,12 @@ void Mesh::CreateVAO()
 	glBindVertexArray(0);
 }
 
-void Mesh::Draw(const std::vector<unsigned>& textures) const
+void Mesh::Draw(const unsigned programId, const unsigned textureId) const
 {
 	glUseProgram(programId);
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textures[materialIndex]);
+	glActiveTexture(GL_TEXTURE5);
+	glBindTexture(GL_TEXTURE_2D, textureId);
 	glUniform1i(glGetUniformLocation(programId, "diffuse"), 0);
 
 	glBindVertexArray(vao);

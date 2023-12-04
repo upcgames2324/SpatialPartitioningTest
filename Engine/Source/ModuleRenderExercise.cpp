@@ -4,6 +4,7 @@
 #include "ModuleDebugDraw.h"
 #include "ModuleTexture.h"
 #include "ModuleCamera.h"
+#include "Model.h"
 #include "Application.h"
 #include "MathGeoLib.h"
 #include <GL/glew.h>
@@ -19,15 +20,20 @@ ModuleRenderExercise::~ModuleRenderExercise()
 
 bool ModuleRenderExercise::Init()
 {
-	LOG("Creating triangle exercise");
-	vbo1 = CreateTriangleVBO();
-	App->GetModuleTexture()->LoadTexture(L"./Textures/Test-image-Baboon.ppm");
+	//LOG("Creating triangle exercise");
+	//vbo1 = CreateTriangleVBO();
+	//App->GetModuleTexture()->LoadTexture(L"./Textures/Test-image-Baboon.ppm");
+
+	// Loading models
+	Model* model1 = new Model();
+	model1->Load("./Models/SampleModels/TriangleWithoutIndices.gltf");
+	models.push_back(model1);
 
 	// Create basic vertex and fragment shader
-	char* vertex_shader = moduleProgram->LoadShaderSource("../Source/shaders/vertex_02_textures.glsl"); // vertex_hello_world, vertex_01_modelview
+	char* vertex_shader = moduleProgram->LoadShaderSource("../Source/shaders/vertex_01_modelview.glsl"); // vertex_hello_world, vertex_01_modelview, vertex_02_textures
 	unsigned vertex_id = moduleProgram->CompileShader(GL_VERTEX_SHADER, vertex_shader);
 
-	char* fragment_shader = moduleProgram->LoadShaderSource("../Source/shaders/fragment_02_textures.glsl");
+	char* fragment_shader = moduleProgram->LoadShaderSource("../Source/shaders/fragment_hello_world.glsl"); // fragment_hello_world, fragment_02_textures
 	unsigned fragment_id = moduleProgram->CompileShader(GL_FRAGMENT_SHADER, fragment_shader);
 
 	program_id = moduleProgram->CreateProgram(vertex_id, fragment_id);
@@ -42,7 +48,25 @@ update_status ModuleRenderExercise::PreUpdate()
 update_status ModuleRenderExercise::Update()
 {
 	// Render simple triangle
-	RenderVBO(vbo1);
+	//RenderVBO(vbo1);
+
+	// TODO: QUIT
+	float4x4 model = float4x4::identity;//float4x4::FromTRS(float3(2.0f, 0.0f, 0.0f), float4x4::RotateZ(pi / 4.0f), float3(2.0f, 1.0f, 1.0f));
+	float4x4 view = App->GetModuleCamera()->GetViewMatrix();
+	float4x4 proj = App->GetModuleCamera()->GetProjectionMatrix();
+
+	glUseProgram(program_id);
+	glUniformMatrix4fv(0, 1, GL_TRUE, &model[0][0]);
+	glUniformMatrix4fv(1, 1, GL_TRUE, &view[0][0]);
+	glUniformMatrix4fv(2, 1, GL_TRUE, &proj[0][0]);
+
+	App->GetModuleDebugDraw()->Draw(view, proj, App->GetWindow()->GetWidth(), App->GetWindow()->GetHeight());
+	//
+	
+	for (const Model* model : models)
+	{
+		model->Draw(program_id);
+	}
 
 	return UPDATE_CONTINUE;
 }

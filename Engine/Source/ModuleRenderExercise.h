@@ -3,6 +3,7 @@
 #include "Math/float4x4.h"
 
 class ModuleProgram;
+class Model;
 
 class ModuleRenderExercise : public Module
 {
@@ -25,4 +26,5 @@ public:
 private:
 	unsigned vbo1, program_id;
 	ModuleProgram* moduleProgram;
+	std::vector<Model*> models;
 };

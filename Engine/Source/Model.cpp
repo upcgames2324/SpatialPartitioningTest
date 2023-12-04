@@ -31,6 +31,8 @@ void Model::Load(const char* assetFileName)
 			meshes.push_back(mesh);
 		}
 	}
+
+	LoadMaterials(gltfmodel);
 }
 
 void Model::LoadMaterials(const tinygltf::Model& srcModel)
@@ -46,5 +48,13 @@ void Model::LoadMaterials(const tinygltf::Model& srcModel)
 			textureId = App->GetModuleTexture()->LoadTexture(imageUri);
 		}
 		textures.push_back(textureId);
+	}
+}
+
+void Model::Draw(const unsigned programId) const
+{
+	for (int i = 0; i < meshes.size(); ++i)
+	{
+		meshes[i]->Draw(programId, textures[i]);
 	}
 }
