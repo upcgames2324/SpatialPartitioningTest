@@ -181,10 +181,9 @@ void Mesh::RenderInterleaved() const
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, bufferSize, (void*)0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, bufferSize, (void*)(sizeof(float) * 3));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, bufferSize, (void*)(sizeof(float) * 6));
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, bufferSize, (void*)(sizeof(float) * 6));
-	//glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, bufferSize, (void*)(sizeof(float) * 3));
 }
 
 void Mesh::RenderSeparated() const
@@ -193,8 +192,7 @@ void Mesh::RenderSeparated() const
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 3 * vertexCount));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 6 * vertexCount));
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 6 * vertexCount));
-	//glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 3 * vertexCount));
 }

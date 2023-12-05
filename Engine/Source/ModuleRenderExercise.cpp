@@ -26,7 +26,7 @@ bool ModuleRenderExercise::Init()
 
 	// Loading models
 	Model* model1 = new Model();
-	model1->Load("./Models/SampleModels/BoxTextured.gltf");// SampleModels/TriangleWithoutIndices.gltf, Box.gltf, /BakerHouse/BakerHouse.gltf
+	model1->Load("./Models/BakerHouse/BakerHouse.gltf");// SampleModels/TriangleWithoutIndices.gltf, Box.gltf, /BakerHouse/BakerHouse.gltf
 	models.push_back(model1);
 
 	// Create basic vertex and fragment shader
