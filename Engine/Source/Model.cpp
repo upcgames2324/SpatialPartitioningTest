@@ -19,7 +19,7 @@ Model::~Model()
 	}
 }
 
-void Model::Load(const char* assetFileName)
+void Model::Load(const std::string& assetFileName)
 {
 	tinygltf::TinyGLTF gltfContext;
 	tinygltf::Model gltfmodel;
@@ -41,11 +41,16 @@ void Model::Load(const char* assetFileName)
 		}
 	}
 	if (gltfmodel.materials.size() > 0) {
-		LoadMaterials(gltfmodel);
+		size_t pathPos = assetFileName.find_last_of('/');
+		if (pathPos == std::string::npos) {
+			pathPos = assetFileName.find_last_of('\\');
+		}
+		const std::string filePath = assetFileName.substr(0, pathPos + 1);
+		LoadMaterials(gltfmodel, filePath);
 	}
 }
 
-void Model::LoadMaterials(const tinygltf::Model& srcModel)
+void Model::LoadMaterials(const tinygltf::Model& srcModel, const std::string& filePath)
 {
 	for (const auto& srcMaterial : srcModel.materials)
 	{
@@ -54,7 +59,11 @@ void Model::LoadMaterials(const tinygltf::Model& srcModel)
 		{
 			const tinygltf::Texture& texture = srcModel.textures[srcMaterial.pbrMetallicRoughness.baseColorTexture.index];
 			const tinygltf::Image& image = srcModel.images[texture.source];
-			const wchar_t* imageUri = std::wstring(image.uri.begin(), image.uri.end()).c_str();
+
+			std::wstring widestr (filePath.begin(), filePath.end());
+			widestr += std::wstring(image.uri.begin(), image.uri.end());
+			const wchar_t* imageUri = widestr.c_str();
+			
 			textureId = App->GetModuleTexture()->LoadTexture(imageUri);
 		}
 		textures.push_back(textureId);

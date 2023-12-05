@@ -26,14 +26,14 @@ bool ModuleRenderExercise::Init()
 
 	// Loading models
 	Model* model1 = new Model();
-	model1->Load("./Models/SampleModels/Box.gltf");// SampleModels/TriangleWithoutIndices.gltf, Box.gltf, /BakerHouse/BakerHouse.gltf
+	model1->Load("./Models/SampleModels/BoxTextured.gltf");// SampleModels/TriangleWithoutIndices.gltf, Box.gltf, /BakerHouse/BakerHouse.gltf
 	models.push_back(model1);
 
 	// Create basic vertex and fragment shader
-	char* vertex_shader = moduleProgram->LoadShaderSource("../Source/shaders/vertex_01_modelview.glsl"); // vertex_hello_world, vertex_01_modelview, vertex_02_textures
+	char* vertex_shader = moduleProgram->LoadShaderSource("../Source/shaders/vertex_02_textures.glsl"); // vertex_hello_world, vertex_01_modelview, vertex_02_textures
 	unsigned vertex_id = moduleProgram->CompileShader(GL_VERTEX_SHADER, vertex_shader);
 
-	char* fragment_shader = moduleProgram->LoadShaderSource("../Source/shaders/fragment_hello_world.glsl"); // fragment_hello_world, fragment_02_textures
+	char* fragment_shader = moduleProgram->LoadShaderSource("../Source/shaders/fragment_02_textures.glsl"); // fragment_hello_world, fragment_02_textures
 	unsigned fragment_id = moduleProgram->CompileShader(GL_FRAGMENT_SHADER, fragment_shader);
 
 	program_id = moduleProgram->CreateProgram(vertex_id, fragment_id);

@@ -43,9 +43,9 @@ void Mesh::Draw(const unsigned programId, const unsigned textureId) const
 	{
 		glActiveTexture(GL_TEXTURE5);
 		glBindTexture(GL_TEXTURE_2D, textureId);
+		glUniform1i(glGetUniformLocation(programId, "diffuse"), 0);
 	}
 
-	//glUniform1i(glGetUniformLocation(programId, "diffuse"), 0);
 	if (indexCount > 0)
 	{
 		glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
