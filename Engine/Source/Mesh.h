@@ -28,6 +28,6 @@ private:
 	unsigned vao, vbo, ebo;
 	size_t vertexCount, indexCount;
 	unsigned posStride, textureStride, normalStride, bufferSize;
-	const float *bufferPos, *bufferTexture, *bufferNormal;
+	const unsigned char *bufferPos, *bufferTexture, *bufferNormal;
 };
 

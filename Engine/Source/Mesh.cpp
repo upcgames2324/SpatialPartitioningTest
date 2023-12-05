@@ -36,7 +36,8 @@ void Mesh::Draw(const unsigned programId, const unsigned textureId) const
 {
 	glUseProgram(programId);
 	glBindVertexArray(vao);
-	RenderSeparated();
+	//RenderSeparated();
+	RenderInterleaved();
 
 	if (textureId != 0) // TODO: check condition existent texture
 	{
@@ -78,7 +79,7 @@ void Mesh::CreateVBO(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primi
 
 		vertexCount = posAcc.count;
 		posStride = posView.byteStride;
-		bufferPos = reinterpret_cast<const float*>(posBuffer.data[posAcc.byteOffset + posView.byteOffset]);
+		bufferPos = &(posBuffer.data[posAcc.byteOffset + posView.byteOffset]);
 		bufferSize += sizeof(float) * 3;
 	}
 	if (itNormal != primitive.attributes.end())
@@ -90,7 +91,7 @@ void Mesh::CreateVBO(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primi
 		const tinygltf::Buffer& normalBuffer = model.buffers[normalView.buffer];
 
 		normalStride = normalView.byteStride;
-		bufferNormal = reinterpret_cast<const float*>(normalBuffer.data[normalAcc.byteOffset + normalView.byteOffset]);
+		bufferNormal = &(normalBuffer.data[normalAcc.byteOffset + normalView.byteOffset]);
 		bufferSize += sizeof(float) * 3;
 	}
 	if (itTexture != primitive.attributes.end())
@@ -101,19 +102,40 @@ void Mesh::CreateVBO(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primi
 		const tinygltf::BufferView& textureView = model.bufferViews[textureAcc.bufferView];
 		const tinygltf::Buffer& textureBuffer = model.buffers[textureView.buffer];
 
-		bufferTexture = reinterpret_cast<const float*>(textureBuffer.data[textureAcc.byteOffset + textureView.byteOffset]);
+		bufferTexture = &(textureBuffer.data[textureAcc.byteOffset + textureView.byteOffset]);
 		bufferSize += sizeof(float) * 2;
 	}
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	// glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3 * posAcc.count, bufferPos, GL_STATIC_DRAW); // No byte stride
 	glBufferData(GL_ARRAY_BUFFER, bufferSize * vertexCount, nullptr, GL_STATIC_DRAW);
-	float3* ptr = reinterpret_cast<float3*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+	float* ptr = reinterpret_cast<float*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+	int overhead = 0;
 	for (size_t i = 0; i < vertexCount; ++i)
 	{
-		ptr[i] = *reinterpret_cast<const float3*>(bufferPos);
-		bufferPos += posStride;
+		for (int j = 0; j < 3; ++j) {
+			ptr[overhead] = reinterpret_cast<const float*>(bufferPos)[j];
+			overhead++;
+		}
+		bufferPos += (posStride == 0) ? sizeof(float) * 3 : posStride;
+
+		if (bufferNormal != nullptr)
+		{
+			for (int j = 0; j < 3; ++j) {
+				ptr[overhead] = reinterpret_cast<const float*>(bufferNormal)[j];
+				overhead++;
+			}
+			bufferNormal += (normalStride == 0) ? sizeof(float) * 3 : normalStride;
+		}
+
+		if (bufferTexture != nullptr)
+		{
+			for (int j = 0; j < 2; ++j) {
+				ptr[overhead] = reinterpret_cast<const float*>(bufferTexture)[j];
+				overhead++;
+			}
+			bufferTexture += (textureStride == 0) ? sizeof(float) * 2 : textureStride;
+		}
 	}
 
 	glUnmapBuffer(GL_ARRAY_BUFFER);
@@ -157,20 +179,22 @@ void Mesh::RenderInterleaved() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3 + sizeof(float) * 2, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, bufferSize, (void*)0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 3 + sizeof(float) * 2, (void*)(sizeof(float) * 3));
-	glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, bufferSize, (void*)(sizeof(float) * 3));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, bufferSize, (void*)(sizeof(float) * 6));
+	//glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 }
 
 void Mesh::RenderSeparated() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, bufferSize, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, bufferSize, (void*)(sizeof(float) * 3));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 3 * vertexCount));
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, bufferSize, (void*)(sizeof(float) * 6));
-	glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 6 * vertexCount));
+	//glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 }
