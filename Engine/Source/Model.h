@@ -8,6 +8,8 @@ namespace tinygltf {
 class Model
 {
 public:
+	~Model();
+
 	void Load(const char* assetFileName);
 
 	void LoadMaterials(const tinygltf::Model& srcModel);

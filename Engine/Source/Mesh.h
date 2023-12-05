@@ -8,13 +8,18 @@ public:
 
 	void Load(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive primitive);
 
-	void RenderInterleaved(const unsigned programId) const;
-
-	void RenderSeparated(const unsigned programId) const;
-
-	void CreateVAO(bool interleaved);
-
 	void Draw(const unsigned programId, const unsigned textureId) const;
+
+private:
+	void CreateVAO();
+
+	void CreateVBO(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive primitive);
+
+	void CreateEBO(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive primitive);
+
+	void RenderInterleaved() const;
+
+	void RenderSeparated() const;
 
 private:
 	// VBO filled from tinygltf primitive attributes
@@ -22,6 +27,7 @@ private:
 	// Material index from tinygltf primitive material
 	unsigned vao, vbo, ebo;
 	size_t vertexCount, indexCount;
-	bool interleavedVertices;
+	unsigned posStride, textureStride, normalStride, bufferSize;
+	const float *bufferPos, *bufferTexture, *bufferNormal;
 };
 

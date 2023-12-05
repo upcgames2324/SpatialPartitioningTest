@@ -10,6 +10,15 @@
 #include "ModuleTexture.h"
 #include "Globals.h"
 
+Model::~Model()
+{
+	for (Mesh* mesh : meshes) {
+		if (mesh != nullptr) {
+			delete(mesh);
+		}
+	}
+}
+
 void Model::Load(const char* assetFileName)
 {
 	tinygltf::TinyGLTF gltfContext;
@@ -31,8 +40,9 @@ void Model::Load(const char* assetFileName)
 			meshes.push_back(mesh);
 		}
 	}
-
-	LoadMaterials(gltfmodel);
+	if (gltfmodel.materials.size() > 0) {
+		LoadMaterials(gltfmodel);
+	}
 }
 
 void Model::LoadMaterials(const tinygltf::Model& srcModel)
@@ -55,7 +65,7 @@ void Model::Draw(const unsigned programId) const
 {
 	for (int i = 0; i < meshes.size(); ++i)
 	{
-		unsigned textureId = (textures.size() > i) ? i : 0;
+		unsigned textureId = (textures.size() > i) ? textures[i] : 0;
 		meshes[i]->Draw(programId, textureId);
 	}
 }
