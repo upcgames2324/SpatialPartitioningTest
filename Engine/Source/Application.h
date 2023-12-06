@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Globals.h"
-#include "Module.h"
+#include <vector>
 
+class Module;
 class ModuleOpenGL;
 class ModuleWindow;
 class ModuleTextures;
@@ -16,7 +17,6 @@ class ModuleTexture;
 class Application
 {
 public:
-
 	Application();
 	~Application();
 
@@ -33,7 +33,6 @@ public:
     ModuleTexture* GetModuleTexture() { return moduleTexture; }
 
 private:
-
     ModuleOpenGL* render = nullptr;
     ModuleWindow* window = nullptr;
     ModuleInput* input = nullptr;

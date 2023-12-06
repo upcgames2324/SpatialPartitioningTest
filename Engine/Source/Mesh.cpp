@@ -23,7 +23,7 @@ Mesh::~Mesh()
 	glDeleteBuffers(1, &ebo);
 }
 
-void Mesh::Load(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive primitive)
+void Mesh::Load(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive)
 {
 	CreateVAO();
 	CreateVBO(model, mesh, primitive);
@@ -62,7 +62,7 @@ void Mesh::CreateVAO()
 	glBindVertexArray(vao);
 }
 
-void Mesh::CreateVBO(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive primitive)
+void Mesh::CreateVBO(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive)
 {
 	const auto& itPos = primitive.attributes.find("POSITION");
 	const auto& itNormal = primitive.attributes.find("NORMAL");
@@ -141,7 +141,7 @@ void Mesh::CreateVBO(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primi
 	glUnmapBuffer(GL_ARRAY_BUFFER);
 }
 
-void Mesh::CreateEBO(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive primitive)
+void Mesh::CreateEBO(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive)
 {
 	glGenBuffers(1, &ebo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);

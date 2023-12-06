@@ -6,16 +6,16 @@ public:
 	Mesh();
 	~Mesh();
 
-	void Load(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive primitive);
+	void Load(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive);
 
 	void Draw(const unsigned programId, const unsigned textureId) const;
 
 private:
 	void CreateVAO();
 
-	void CreateVBO(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive primitive);
+	void CreateVBO(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive);
 
-	void CreateEBO(tinygltf::Model model, tinygltf::Mesh mesh, tinygltf::Primitive primitive);
+	void CreateEBO(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive);
 
 	void RenderInterleaved() const;
 

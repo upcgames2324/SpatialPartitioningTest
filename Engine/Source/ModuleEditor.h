@@ -19,6 +19,7 @@ public:
 private:
 	void ShowUpperMenu() const;
 	void ShowWindowConsole() const;
+	void ShowWindowPerformance() const;
 
 private:
 	ImGuiContext* imGuiContext;

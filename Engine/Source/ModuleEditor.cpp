@@ -7,6 +7,7 @@
 
 ModuleEditor::ModuleEditor()
 {
+    imGuiContext = nullptr;
 }
 
 ModuleEditor::~ModuleEditor()
@@ -15,7 +16,6 @@ ModuleEditor::~ModuleEditor()
 
 bool ModuleEditor::Init()
 {
-    // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     imGuiContext = ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
@@ -24,10 +24,10 @@ bool ModuleEditor::Init()
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
     //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 
-    // Init for OpenGL3, SDL2
     ImGui_ImplSDL2_InitForOpenGL(App->GetWindow()->window, App->GetOpenGL()->getContext());
-    const char* glsl_version = "#version 130"; // GL 3.0 + GLSL 130
-    ImGui_ImplOpenGL3_Init(glsl_version);
+    ImGui_ImplOpenGL3_Init("#version 440");
+
+    ImGui::StyleColorsDark();
 
 	return true;
 }
@@ -45,8 +45,9 @@ update_status ModuleEditor::Update()
 {
     //ImGui::ShowDemoWindow();
     
-    //ShowUpperMenu();
-    //ShowWindowConsole();
+    ShowUpperMenu();
+    ShowWindowConsole();
+    ShowWindowPerformance();
 
     // Render frame before swapping buffers (OpenGL PostUpdate)
     ImGui::Render();
@@ -74,29 +75,50 @@ void ModuleEditor::AddLog(const char* log)
     logs.push_back(log);
 }
 
+
 void ModuleEditor::ShowUpperMenu() const
 {
+    static bool show_menu_about = false;
     if (ImGui::BeginMainMenuBar())
     {
+        if (ImGui::BeginMenu("File"))
+        {
+
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("View"))
+        {
+
+            ImGui::EndMenu();
+        }
         if (ImGui::BeginMenu("Help"))
         {
             if (ImGui::MenuItem("Github")) {
                 //Navigate("https://github.com/Bermellet/3D-Engine-Glew");
             }
 
-            if (ImGui::MenuItem("About")) {
-                ImGui::Text("Engine ..."); // TODO
-                ImGui::Text("3D Engine using OpenGL");
-                ImGui::Text("By Jordi Nieto (Bermellet)");
-                ImGui::Separator();
-                ImGui::Text("Libraries: OpenGL, SDL, Glew, MathGeoLib, ImGui, tinygltf"); // TODO
-                ImGui::Separator();
-                ImGui::Text("GNU GENERAL PUBLIC LICENSE");
+            if (ImGui::MenuItem("About", NULL, &show_menu_about)) {
+                bool openAbout = false;
+                
             }
-
             ImGui::EndMenu();
         }
         ImGui::EndMainMenuBar();
+    }
+
+    // Print
+    if (show_menu_about) {
+        if (ImGui::Begin("About", &show_menu_about, ImGuiWindowFlags_AlwaysAutoResize)) {
+            ImGui::Text("RoadToEngine");
+            ImGui::Separator();
+            ImGui::Text("3D Engine using OpenGL");
+            ImGui::Text("By Jordi Nieto (Bermellet)");
+            ImGui::Separator();
+            ImGui::Text("Libraries: OpenGL, SDL, Glew, MathGeoLib, ImGui, tinygltf"); // TODO
+            ImGui::Separator();
+            ImGui::Text("GNU GENERAL PUBLIC LICENSE");
+        }
+        ImGui::End();
     }
 }
 
@@ -106,6 +128,13 @@ void ModuleEditor::ShowWindowConsole() const {
     for (const char* log : logs) {
         ImGui::TextUnformatted(log);
     }
+
+    ImGui::End();
+}
+
+void ModuleEditor::ShowWindowPerformance() const {
+    ImGui::Begin("Performance");
+
 
     ImGui::End();
 }
