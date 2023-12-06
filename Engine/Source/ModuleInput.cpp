@@ -5,6 +5,7 @@
 #include "ModuleOpenGL.h"
 #include <SDL.h>
 #include <imgui_impl_sdl2.h>
+#include <string>
 
 ModuleInput::ModuleInput()
 {
@@ -77,7 +78,6 @@ update_status ModuleInput::PreUpdate()
 		{
 			case SDL_QUIT:
 				return UPDATE_STOP;
-				//windowEvents[WE_QUIT] = true;
 			break;
 
 			case SDL_WINDOWEVENT:
@@ -101,7 +101,7 @@ update_status ModuleInput::PreUpdate()
 					break;
 
 					case SDL_WINDOWEVENT_RESIZED:
-					case SDL_WINDOWEVENT_SIZE_CHANGED:
+					//case SDL_WINDOWEVENT_SIZE_CHANGED:
 						App->GetWindow()->WindowResized(event.window.data1, event.window.data2);
 					break;
 					case SDL_WINDOWEVENT_CLOSE:
@@ -123,6 +123,10 @@ update_status ModuleInput::PreUpdate()
 				mouse_motion.Y = event.motion.yrel / SCREEN_SIZE;
 				mouse.X = event.motion.x / SCREEN_SIZE;
 				mouse.Y = event.motion.y / SCREEN_SIZE;
+			break;
+
+			case SDL_DROPFILE:
+				std::string dropFile = event.drop.file;
 			break;
 		}
 	}

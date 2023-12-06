@@ -13,13 +13,12 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void SetFOV(float horizontalFov);
-	void SetAspectRatio(float aspectRatio);
-	void SetPlaneDistances(float distanceNear, float distanceFar);
-	void SetPosition(float3 position);
-	void SetOrientation(float3 orientation);
-	void LookAt(float3 looking);
-	void LookAt(float x, float y, float z);
+	void SetFOV(const float horizontalFov);
+	void SetAspectRatio(const float aspectRatio);
+	void SetPlaneDistances(const float distanceNear, const float distanceFar);
+	void SetPosition(const float3& position);
+	void LookAt(const float3& looking);
+	void LookAt(const float x, const float y, const float z);
 	float4x4 GetProjectionMatrix() const;
 	float4x4 GetViewMatrix() const;
 
@@ -31,7 +30,5 @@ private:
 
 private:
 	Frustum frustum;
-	float3 orientation;
-	float3 looking;
 	float aspectRatio;
 };

@@ -8,6 +8,7 @@
 
 ModuleCamera::ModuleCamera()
 {
+	aspectRatio = 1;
 }
 
 ModuleCamera::~ModuleCamera()
@@ -16,20 +17,16 @@ ModuleCamera::~ModuleCamera()
 
 bool ModuleCamera::Init()
 {
+	aspectRatio = App->GetWindow()->GetAspectRatio();
+
 	frustum.type = FrustumType::PerspectiveFrustum;
 	frustum.nearPlaneDistance = 0.1f;
 	frustum.farPlaneDistance = 200.0f;
-	// TODO
-	//frustum.horizontalFov = math::DegToRad(90.0f);
-	//ComputeVerticalFov();
 	frustum.verticalFov = math::pi / 4.0f;
-	frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * App->GetWindow()->GetAspectRatio());
+	frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * aspectRatio);
 	frustum.pos = float3(0.0f, 1.0f, 8.0f);
 	frustum.front = -float3::unitZ;
 	frustum.up = float3::unitY;
-
-	this->orientation = float3::zero;
-	this->looking = float3::zero;
 
 	return true;
 }
@@ -46,40 +43,38 @@ bool ModuleCamera::CleanUp()
 	return true;
 }
 
-void ModuleCamera::SetFOV(float horizontalFov)
+void ModuleCamera::SetFOV(const float horizontalFov)
 {
 	frustum.horizontalFov = horizontalFov;
 	ComputeVerticalFov();
 }
 
-void ModuleCamera::SetAspectRatio(float aspectRatio)
+void ModuleCamera::SetAspectRatio(const float aspectRatio)
 {
-	aspectRatio = aspectRatio;
+	this->aspectRatio = aspectRatio;
 	ComputeVerticalFov();
 }
 
-void ModuleCamera::SetPlaneDistances(float distanceNear, float distanceFar)
+void ModuleCamera::SetPlaneDistances(const float distanceNear, const float distanceFar)
 {
 	frustum.nearPlaneDistance = distanceNear;
 	frustum.farPlaneDistance = distanceFar;
 }
 
-void ModuleCamera::SetPosition(float3 position)
+void ModuleCamera::SetPosition(const float3& position)
 {
 	frustum.pos = position;
 }
 
-void ModuleCamera::SetOrientation(float3 orientation)
+void ModuleCamera::LookAt(const float3& looking)
 {
-	this->orientation = orientation; // TODO
+	float3 direction = float3(looking - frustum.front).Normalized();
+	float3x3 lookAt = float3x3::LookAt(frustum.front, direction, frustum.up, float3::unitY);
+	frustum.front = lookAt.MulDir(frustum.front).Normalized();
+	frustum.up = lookAt.MulDir(frustum.up).Normalized();
 }
 
-void ModuleCamera::LookAt(float3 looking)
-{
-	this->looking = looking; // TODO
-}
-
-void ModuleCamera::LookAt(float x, float y, float z)
+void ModuleCamera::LookAt(const float x, const float y, const float z)
 {
 	LookAt(float3(x, y, z));
 }
@@ -111,7 +106,7 @@ void ModuleCamera::RotateAngle(const float3& axis, const float angle)
 
 void ModuleCamera::ComputeVerticalFov()
 {
-	frustum.verticalFov = frustum.horizontalFov / aspectRatio;
+	frustum.verticalFov = 2.f * atanf(tanf(frustum.horizontalFov * 0.5f) * (1.0f / aspectRatio));
 }
 
 void ModuleCamera::CheckInputs()
