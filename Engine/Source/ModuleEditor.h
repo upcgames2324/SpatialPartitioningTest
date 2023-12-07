@@ -1,7 +1,11 @@
 #pragma once
 #include "Module.h"
 
+#define VECTOR_SIZE 128
+
 struct ImGuiContext;
+typedef int ImGuiWindowFlags;
+typedef uint64_t Uint64;
 
 class ModuleEditor : public Module
 {
@@ -18,10 +22,14 @@ public:
 
 private:
 	void ShowUpperMenu() const;
+	void ShowMenuAbout(bool& show_menu_about) const;
 	void ShowWindowConsole() const;
-	void ShowWindowPerformance() const;
+	void ShowWindowPerformance(bool& show_window_performance) const;
 
 private:
 	ImGuiContext* imGuiContext;
+	ImGuiWindowFlags windowFlags;
 	std::vector<const char*> logs;
+	std::vector<float> elapsedTime, fpsLog;
+	Uint64 timer;
 };
