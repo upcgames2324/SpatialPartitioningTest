@@ -4,6 +4,7 @@
 #include "ModuleDebugDraw.h"
 #include "ModuleTexture.h"
 #include "ModuleCamera.h"
+#include "ModuleEditor.h"
 #include "Model.h"
 #include "Application.h"
 #include "MathGeoLib.h"
@@ -109,6 +110,12 @@ void ModuleRenderExercise::LoadPredefinedModel(int model)
 
 		break;
 	}
+}
+
+void ModuleRenderExercise::LoadModel(const std::string& path)
+{
+	App->GetModuleEditor()->CustomModelLoaded();
+	LoadModel(path, float4x4::identity);
 }
 
 void ModuleRenderExercise::LoadModel(const std::string& path, const float4x4& modelMatrix = float4x4::identity)

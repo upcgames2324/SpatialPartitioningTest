@@ -18,6 +18,7 @@ public:
 	bool CleanUp();
 
 	void LoadPredefinedModel(int model);
+	void LoadModel(const std::string& path);
 	void LoadModel(const std::string& path, const float4x4& modelMatrix);
 
 private:

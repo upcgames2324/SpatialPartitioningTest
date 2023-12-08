@@ -9,6 +9,8 @@
 #include <SDL.h>
 #include <SDL_cpuinfo.h>
 
+int ModuleEditor::modelLoaded;
+
 ModuleEditor::ModuleEditor()
 {
     imGuiContext = nullptr;
@@ -17,6 +19,7 @@ ModuleEditor::ModuleEditor()
     fpsLog.reserve(VECTOR_SIZE);
     windowFlags = 0;
     timer = 0;
+    modelLoaded = 0;
 }
 
 ModuleEditor::~ModuleEditor()
@@ -105,10 +108,14 @@ float ModuleEditor::GetLastRenderTime() const
     return elapsedTime.size() > 0 ? elapsedTime[elapsedTime.size() - 1] : 1;
 }
 
+void ModuleEditor::CustomModelLoaded()
+{
+    modelLoaded = -1;
+}
+
 
 void ModuleEditor::ShowUpperMenu() const
 {
-    static int modelLoaded = 0;
     static bool show_window_console = false;
     static bool show_window_performance = false;
     static bool show_window_system_info = false;
@@ -126,6 +133,7 @@ void ModuleEditor::ShowUpperMenu() const
 
                 ImGui::EndMenu();
             }
+            //if (ImGui::MenuItem("Open model", "Ctrl+O")) {}
 
             if (ImGui::MenuItem("Exit")) {
                 exit(0);

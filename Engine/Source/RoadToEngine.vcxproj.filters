@@ -384,6 +384,7 @@
     <ClInclude Include="Model.h">
       <Filter>Assets</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgui">
@@ -434,5 +435,8 @@
       <Filter>MathGeoLib\Math</Filter>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RoadToEngine.rc" />
   </ItemGroup>
 </Project>

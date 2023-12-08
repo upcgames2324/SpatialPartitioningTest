@@ -20,6 +20,7 @@ public:
 	bool CleanUp();
 	void AddLog(const char* log);
 	float GetLastRenderTime() const;
+	void CustomModelLoaded();
 
 private:
 	void ShowUpperMenu() const;
@@ -28,11 +29,11 @@ private:
 	void ShowWindowSystemInfo(bool& show_window_system_info) const;
 	void ShowHelpAbout(bool& show_help_about) const;
 
-
 private:
 	ImGuiContext* imGuiContext;
 	ImGuiWindowFlags windowFlags;
 	std::vector<const char*> logs;
 	std::vector<float> elapsedTime, fpsLog;
 	Uint64 timer;
+	int static modelLoaded;
 };

@@ -28,3 +28,7 @@ All the C++ libraries are added to the repository and should be detected automat
 
 ## Additional comments
 
+The engine is able to load the given models and changing between them without problem.
+
+The drag-and-drop functionality of .gltf models has been implemented.
+

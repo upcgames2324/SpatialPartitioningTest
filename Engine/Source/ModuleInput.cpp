@@ -1,10 +1,13 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include "ModuleRenderExercise.h"
 #include "ModuleWindow.h"
 #include "ModuleOpenGL.h"
 #include <SDL.h>
 #include <imgui_impl_sdl2.h>
+#include <algorithm>
+#include <cctype>
 #include <string>
 
 ModuleInput::ModuleInput()
@@ -39,11 +42,8 @@ bool ModuleInput::Init()
 update_status ModuleInput::PreUpdate()
 {
 	static SDL_Event event;
-
-	mouse_motion = { 0, 0 };
-	//memset(windowEvents, false, WE_COUNT * sizeof(bool));
-
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
+	mouse_motion = { 0, 0 };
 
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{
@@ -123,13 +123,14 @@ update_status ModuleInput::PreUpdate()
 
 			case SDL_DROPFILE:
 				std::string dropFile = event.drop.file;
+				std::string extension = dropFile.substr(dropFile.size() - 1 - 4, 5);
+				std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) { return std::tolower(c); });
+				if (extension == ".gltf") {
+					App->GetModuleRender()->LoadModel(dropFile);
+				}
 			break;
 		}
 	}
-	/*
-	if(GetWindowEvent(EventWindow::WE_QUIT) == true || GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		return UPDATE_STOP;
-	*/
 
     return UPDATE_CONTINUE;
 }
