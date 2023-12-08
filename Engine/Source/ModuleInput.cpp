@@ -87,8 +87,6 @@ update_status ModuleInput::PreUpdate()
 					case SDL_WINDOWEVENT_HIDDEN:
 					case SDL_WINDOWEVENT_MINIMIZED:
 					case SDL_WINDOWEVENT_FOCUS_LOST:
-						// TODO
-						//windowEvents[WE_HIDE] = true;
 					break;
 
 					case SDL_WINDOWEVENT_ENTER:
@@ -96,8 +94,6 @@ update_status ModuleInput::PreUpdate()
 					case SDL_WINDOWEVENT_FOCUS_GAINED:
 					case SDL_WINDOWEVENT_MAXIMIZED:
 					case SDL_WINDOWEVENT_RESTORED:
-						// TODO
-						//windowEvents[WE_SHOW] = true;
 					break;
 
 					case SDL_WINDOWEVENT_RESIZED:

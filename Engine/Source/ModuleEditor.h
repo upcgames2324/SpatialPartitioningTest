@@ -19,6 +19,7 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 	void AddLog(const char* log);
+	float GetLastRenderTime() const;
 
 private:
 	void ShowUpperMenu() const;

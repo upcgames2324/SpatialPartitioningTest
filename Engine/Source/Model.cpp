@@ -9,6 +9,12 @@
 #include "Application.h"
 #include "ModuleTexture.h"
 #include "Globals.h"
+#include "Math/float4x4.h"
+
+Model::Model()
+{
+	modelMatrix = float4x4::identity;
+}
 
 Model::~Model()
 {
@@ -19,7 +25,7 @@ Model::~Model()
 	}
 }
 
-void Model::Load(const std::string& assetFileName)
+void Model::Load(const std::string& assetFileName, const float4x4& modelMatrix)
 {
 	tinygltf::TinyGLTF gltfContext;
 	tinygltf::Model gltfmodel;
@@ -30,6 +36,8 @@ void Model::Load(const std::string& assetFileName)
 		LOG("Error loading %s: %s", assetFileName, error.c_str());
 		return;
 	}
+
+	this->modelMatrix = modelMatrix;
 
 	for (const auto& gltfMesh : gltfmodel.meshes)
 	{
@@ -77,4 +85,9 @@ void Model::Draw(const unsigned programId) const
 		unsigned textureId = (textures.size() > i) ? textures[i] : 0;
 		meshes[i]->Draw(programId, textureId);
 	}
+}
+
+const float4x4 Model::GetModelMatrix() const
+{
+	return modelMatrix;
 }

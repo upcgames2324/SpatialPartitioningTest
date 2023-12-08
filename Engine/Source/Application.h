@@ -31,6 +31,7 @@ public:
     ModuleDebugDraw*  GetModuleDebugDraw() { return debugDraw; }
     ModuleCamera* GetModuleCamera() { return moduleCamera; }
     ModuleTexture* GetModuleTexture() { return moduleTexture; }
+    ModuleRenderExercise* GetModuleRender() { return renderExercise; }
 
 private:
     ModuleOpenGL* render = nullptr;

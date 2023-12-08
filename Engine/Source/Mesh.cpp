@@ -39,7 +39,7 @@ void Mesh::Draw(const unsigned programId, const unsigned textureId) const
 	//RenderSeparated();
 	RenderInterleaved();
 
-	if (textureId != 0) // TODO: check condition existent texture
+	if (textureId != 0)
 	{
 		glActiveTexture(GL_TEXTURE5);
 		glBindTexture(GL_TEXTURE_2D, textureId);

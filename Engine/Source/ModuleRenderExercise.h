@@ -17,6 +17,9 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
+	void LoadPredefinedModel(int model);
+	void LoadModel(const std::string& path, const float4x4& modelMatrix);
+
 private:
 	unsigned CreateTriangleVBO();
 	void RenderVBO(unsigned vbo) const;
@@ -25,7 +28,9 @@ private:
 	float4x4 LookAt(const float3& position, const float3& target, float3& up) const;
 
 private:
-	unsigned vbo1, program_id;
+	unsigned program_id;
 	ModuleProgram* moduleProgram;
-	std::vector<Model*> models;
+	//std::vector<Model*> models;
+	Model* model;
+	std::string currentModelPath;
 };

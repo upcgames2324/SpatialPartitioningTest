@@ -2,6 +2,7 @@
 #include "ModuleCamera.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
+#include "ModuleEditor.h"
 #include "MathGeoLib.h"
 #include <GL/glew.h>
 #include <SDL.h>
@@ -107,15 +108,14 @@ void ModuleCamera::ComputeVerticalFov()
 
 void ModuleCamera::CheckInputs()
 {
-	float moveSpeed = 2.0f;
-	float deltaTime = 1.0f / 60.0f; // TODO: get from SDL
-	COORD mouseMovement = App->GetInput()->GetMouseMotion();
-	float mouseSensibility = -0.5f;
-
-	float3 position = frustum.pos;
-
 	if (App->GetInput()->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KeyState::KEY_REPEAT)
 	{
+		float moveSpeed = 0.01f;
+		float mouseSensibility = -0.5f;
+		float deltaTime = App->GetModuleEditor()->GetLastRenderTime();
+		COORD mouseMovement = App->GetInput()->GetMouseMotion();
+		float3 position = frustum.pos;
+
 		if (App->GetInput()->GetKey(SDL_SCANCODE_LSHIFT) == KeyState::KEY_REPEAT || App->GetInput()->GetKey(SDL_SCANCODE_RSHIFT) == KeyState::KEY_REPEAT)
 		{
 			moveSpeed *= 2;

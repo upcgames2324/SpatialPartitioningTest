@@ -7,6 +7,7 @@
 
 ModuleOpenGL::ModuleOpenGL()
 {
+	context = nullptr;
 }
 
 // Destructor

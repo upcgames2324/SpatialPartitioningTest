@@ -75,8 +75,6 @@ unsigned ModuleTexture::LoadTexture(const wchar_t* file)
 			assert(false && "Unsupported format");
 	}
 
-	// TODO: glGenTextures, glBindTexture, glTexParameter, glTexImage2D, glGenerateMipMap, glActiveTexture
-	// TODO: save mutiple textures. Clean them when program ends
 	glGenTextures(1, &texture1);
 	glActiveTexture(GL_TEXTURE5);
 	glBindTexture(GL_TEXTURE_2D, texture1);

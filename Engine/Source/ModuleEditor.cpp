@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleOpenGL.h"
+#include "ModuleRenderExercise.h"
 #include <numeric>
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_sdl2.h>
@@ -58,8 +59,6 @@ update_status ModuleEditor::Update()
     //ImGui::ShowDemoWindow();
     
     ShowUpperMenu();
-    /*ShowWindowConsole();
-    ShowWindowPerformance();*/
 
     // Render frame before swapping buffers (OpenGL PostUpdate)
     ImGui::Render();
@@ -101,9 +100,15 @@ void ModuleEditor::AddLog(const char* log)
     logs.push_back(log);
 }
 
+float ModuleEditor::GetLastRenderTime() const
+{
+    return elapsedTime.size() > 0 ? elapsedTime[elapsedTime.size() - 1] : 1;
+}
+
 
 void ModuleEditor::ShowUpperMenu() const
 {
+    static int modelLoaded = 0;
     static bool show_window_console = false;
     static bool show_window_performance = false;
     static bool show_window_system_info = false;
@@ -113,6 +118,14 @@ void ModuleEditor::ShowUpperMenu() const
     {
         if (ImGui::BeginMenu("File"))
         {
+            if (ImGui::BeginMenu("Load")) {
+                ImGui::RadioButton("Baker house", &modelLoaded, 0);
+                ImGui::RadioButton("Duck", &modelLoaded, 1);
+                ImGui::RadioButton("Patricio", &modelLoaded, 2);
+
+                ImGui::EndMenu();
+            }
+
             if (ImGui::MenuItem("Exit")) {
                 exit(0);
             }
@@ -145,6 +158,7 @@ void ModuleEditor::ShowUpperMenu() const
     if (show_window_performance) { ShowWindowPerformance(show_window_performance); }
     if (show_window_system_info) { ShowWindowSystemInfo(show_window_system_info); }
     if (show_help_about) { ShowHelpAbout(show_help_about); }
+    App->GetModuleRender()->LoadPredefinedModel(modelLoaded);
 }
 
 void ModuleEditor::ShowWindowConsole(bool& show_window_console) const {
@@ -198,7 +212,7 @@ void ModuleEditor::ShowHelpAbout(bool& show_help_about) const
         ImGui::Text("3D Engine using OpenGL");
         ImGui::Text("By Jordi Nieto (Bermellet)");
         ImGui::Separator();
-        ImGui::Text("Libraries: OpenGL, SDL, Glew, MathGeoLib, ImGui, tinygltf"); // TODO
+        ImGui::Text("Libraries: OpenGL, SDL, Glew, MathGeoLib, ImGui, tinygltf");
         ImGui::Separator();
         ImGui::Text("GNU GENERAL PUBLIC LICENSE");
     }

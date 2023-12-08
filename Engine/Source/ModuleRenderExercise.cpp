@@ -12,28 +12,30 @@
 ModuleRenderExercise::ModuleRenderExercise()
 {
 	moduleProgram = new ModuleProgram();
+	model = new Model();
+	program_id = 0;
 }
 
 ModuleRenderExercise::~ModuleRenderExercise()
 {
+	delete moduleProgram;
+	delete model;
+	/*for (Model* model : models) {
+		if (model != nullptr) {
+			delete(model);
+		}
+	}*/
 }
 
 bool ModuleRenderExercise::Init()
 {
-	//LOG("Creating triangle exercise");
-	//vbo1 = CreateTriangleVBO();
-	//App->GetModuleTexture()->LoadTexture(L"./Textures/Test-image-Baboon.ppm");
+	LoadPredefinedModel(0);
 
-	// Loading models
-	Model* model1 = new Model();
-	model1->Load("./Models/BakerHouse/BakerHouse.gltf");// SampleModels/TriangleWithoutIndices.gltf, Box.gltf, /BakerHouse/BakerHouse.gltf
-	models.push_back(model1);
-
-	// Create basic vertex and fragment shader
-	char* vertex_shader = moduleProgram->LoadShaderSource("../Source/shaders/vertex_02_textures.glsl"); // vertex_hello_world, vertex_01_modelview, vertex_02_textures
+	// Create program from vertex and fragment shader
+	char* vertex_shader = moduleProgram->LoadShaderSource("./Shaders/vertex_02_textures.glsl");
 	unsigned vertex_id = moduleProgram->CompileShader(GL_VERTEX_SHADER, vertex_shader);
 
-	char* fragment_shader = moduleProgram->LoadShaderSource("../Source/shaders/fragment_02_textures.glsl"); // fragment_hello_world, fragment_02_textures
+	char* fragment_shader = moduleProgram->LoadShaderSource("./Shaders/fragment_02_textures.glsl");
 	unsigned fragment_id = moduleProgram->CompileShader(GL_FRAGMENT_SHADER, fragment_shader);
 
 	program_id = moduleProgram->CreateProgram(vertex_id, fragment_id);
@@ -47,27 +49,21 @@ update_status ModuleRenderExercise::PreUpdate()
 
 update_status ModuleRenderExercise::Update()
 {
-	// Render simple triangle
-	//RenderVBO(vbo1);
-
-	// TODO: QUIT
-	float4x4 model = float4x4::identity;//float4x4::FromTRS(float3(2.0f, 0.0f, 0.0f), float4x4::RotateZ(pi / 4.0f), float3(2.0f, 1.0f, 1.0f));
 	float4x4 view = App->GetModuleCamera()->GetViewMatrix();
 	float4x4 proj = App->GetModuleCamera()->GetProjectionMatrix();
 
 	glUseProgram(program_id);
-	glUniformMatrix4fv(0, 1, GL_TRUE, &model[0][0]);
 	glUniformMatrix4fv(1, 1, GL_TRUE, &view[0][0]);
 	glUniformMatrix4fv(2, 1, GL_TRUE, &proj[0][0]);
 	
-	for (const Model* model : models)
-	{
+	//for (const Model* model : models)
+	//{
+		float4x4 modelMatrix = model->GetModelMatrix();
+		glUniformMatrix4fv(0, 1, GL_TRUE, &modelMatrix[0][0]);
 		model->Draw(program_id);
-	}
+	//}
 	
-	// TODO: QUIT
 	App->GetModuleDebugDraw()->Draw(view, proj, App->GetWindow()->GetWidth(), App->GetWindow()->GetHeight());
-	//
 	
 	return UPDATE_CONTINUE;
 }
@@ -79,10 +75,45 @@ update_status ModuleRenderExercise::PostUpdate()
 
 bool ModuleRenderExercise::CleanUp()
 {
-	LOG("Destroying renderer");
-	DestroyVBO(vbo1);
-
 	return true;
+}
+
+void ModuleRenderExercise::LoadPredefinedModel(int model)
+{
+	std::string path;
+	switch (model)
+	{
+		case 0:
+			path = "./Models/BakerHouse/BakerHouse.gltf";
+			if (currentModelPath != path) {
+				LoadModel(path, float4x4::FromTRS(float3::zero, float4x4::identity, float3(50.f, 50.f, 50.f)));
+			}
+		break;
+		case 1:
+			path = "./Models/Duck/Duck.gltf";
+			if (currentModelPath != path) {
+				LoadModel(path, float4x4::FromTRS(float3::zero, float4x4::identity, float3(.01f, .01f, .01f)));
+			}
+		break;
+		case 2:
+			path = "./Models/Patricio/Patricio.gltf";
+			if (currentModelPath != path) {
+				LoadModel(path, float4x4::FromTRS(float3::zero, float4x4::RotateX(-math::pi / 2), float3(.005f, .005f, .005f)));
+			}
+		break;
+		case -1:
+
+		break;
+	}
+}
+
+void ModuleRenderExercise::LoadModel(const std::string& path, const float4x4& modelMatrix = float4x4::identity)
+{
+	//Model* model1 = new Model();
+	model->Load(path, modelMatrix);
+	//models.push_back(model1);
+
+	currentModelPath = path;
 }
 
 // This function must be called one time at creation of vertex buffer
@@ -114,7 +145,7 @@ unsigned ModuleRenderExercise::CreateTriangleVBO()
 // This function must be called each frame for drawing the triangle
 void ModuleRenderExercise::RenderVBO(unsigned vbo) const
 {
-	float4x4 model = float4x4::identity;//float4x4::FromTRS(float3(2.0f, 0.0f, 0.0f), float4x4::RotateZ(pi / 4.0f), float3(2.0f, 1.0f, 1.0f));
+	float4x4 model = float4x4::identity;
 	float4x4 view = App->GetModuleCamera()->GetViewMatrix();
 	float4x4 proj = App->GetModuleCamera()->GetProjectionMatrix();
 	
