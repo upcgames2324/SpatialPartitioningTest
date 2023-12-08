@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
-#include "SDL.h"
+#include <SDL.h>
 #include <GL/glew.h>
 
 ModuleWindow::ModuleWindow()

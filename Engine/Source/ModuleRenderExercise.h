@@ -17,11 +17,12 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
+private:
 	unsigned CreateTriangleVBO();
-	void DestroyVBO(unsigned vbo);
-	void RenderVBO(unsigned vbo);
+	void RenderVBO(unsigned vbo) const;
+	void DestroyVBO(unsigned vbo) const;
 
-	float4x4 LookAt(float3 position, float3 target, float3 direction);
+	float4x4 LookAt(const float3& position, const float3& target, float3& up) const;
 
 private:
 	unsigned vbo1, program_id;

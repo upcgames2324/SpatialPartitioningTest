@@ -7,10 +7,9 @@ public:
 	ModuleProgram();
 	~ModuleProgram();
 
-	char* LoadShaderSource(const char* shader_file_name);
-	unsigned CompileShader(unsigned type, const char* source);
-	unsigned CreateProgram(unsigned vtx_shader, unsigned frg_shader);
-
+	char* LoadShaderSource(const char* shader_file_name) const;
+	unsigned CompileShader(unsigned type, const char* source) const;
+	unsigned CreateProgram(unsigned vtx_shader, unsigned frg_shader) const;
 
 };
 

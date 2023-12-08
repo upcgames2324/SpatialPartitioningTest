@@ -112,7 +112,7 @@ unsigned ModuleRenderExercise::CreateTriangleVBO()
 }
 
 // This function must be called each frame for drawing the triangle
-void ModuleRenderExercise::RenderVBO(unsigned vbo)
+void ModuleRenderExercise::RenderVBO(unsigned vbo) const
 {
 	float4x4 model = float4x4::identity;//float4x4::FromTRS(float3(2.0f, 0.0f, 0.0f), float4x4::RotateZ(pi / 4.0f), float3(2.0f, 1.0f, 1.0f));
 	float4x4 view = App->GetModuleCamera()->GetViewMatrix();
@@ -148,12 +148,13 @@ void ModuleRenderExercise::RenderVBO(unsigned vbo)
 }
 
 // This function must be called one time at destruction of vertex buffer
-void ModuleRenderExercise::DestroyVBO(unsigned vbo)
+void ModuleRenderExercise::DestroyVBO(unsigned vbo) const
 {
 	glDeleteBuffers(1, &vbo);
 }
 
-float4x4 ModuleRenderExercise::LookAt(float3 position, float3 target, float3 up) {
+float4x4 ModuleRenderExercise::LookAt(const float3& position, const float3& target, float3& up) const
+{
 	float3 forward = (target - position).Normalized();
 	float3 right = forward.Cross(up).Normalized();
 	up = right.Cross(forward).Normalized();

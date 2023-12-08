@@ -122,7 +122,7 @@ bool ModuleOpenGL::CleanUp()
 	return true;
 }
 
-SDL_GLContext ModuleOpenGL::getContext()
+SDL_GLContext ModuleOpenGL::getContext() const
 {
 	return context;
 }

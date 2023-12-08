@@ -19,8 +19,8 @@ public:
 	void SetPosition(const float3& position);
 	void LookAt(const float3& looking);
 	void LookAt(const float x, const float y, const float z);
-	float4x4 GetProjectionMatrix() const;
-	float4x4 GetViewMatrix() const;
+	const float4x4 GetProjectionMatrix() const;
+	const float4x4 GetViewMatrix() const;
 
 	void RotateAngle(const float3& axis, const float angle);
 

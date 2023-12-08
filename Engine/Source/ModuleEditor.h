@@ -22,9 +22,11 @@ public:
 
 private:
 	void ShowUpperMenu() const;
-	void ShowMenuAbout(bool& show_menu_about) const;
-	void ShowWindowConsole() const;
+	void ShowWindowConsole(bool& show_window_console) const;
 	void ShowWindowPerformance(bool& show_window_performance) const;
+	void ShowWindowSystemInfo(bool& show_window_system_info) const;
+	void ShowHelpAbout(bool& show_help_about) const;
+
 
 private:
 	ImGuiContext* imGuiContext;

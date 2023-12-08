@@ -17,7 +17,7 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	void* getContext();
+	void* getContext() const;
 
 private:
 	void* context;
