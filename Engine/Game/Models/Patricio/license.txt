@@ -1,0 +1,11 @@
+Model Information:
+* title:	Patrick Star (Spongebob)
+* source:	https://sketchfab.com/3d-models/patrick-star-spongebob-02de99ecb51c486891f6438149e7e3cd
+* author:	Anthony Yanez (https://sketchfab.com/paulyanez)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Patrick Star (Spongebob)" (https://sketchfab.com/3d-models/patrick-star-spongebob-02de99ecb51c486891f6438149e7e3cd) by Anthony Yanez (https://sketchfab.com/paulyanez) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

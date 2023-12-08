@@ -30,7 +30,6 @@ private:
 private:
 	unsigned program_id;
 	ModuleProgram* moduleProgram;
-	//std::vector<Model*> models;
-	Model* model;
+	std::vector<Model*> models;
 	std::string currentModelPath;
 };

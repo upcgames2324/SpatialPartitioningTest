@@ -12,19 +12,17 @@
 ModuleRenderExercise::ModuleRenderExercise()
 {
 	moduleProgram = new ModuleProgram();
-	model = new Model();
 	program_id = 0;
 }
 
 ModuleRenderExercise::~ModuleRenderExercise()
 {
 	delete moduleProgram;
-	delete model;
-	/*for (Model* model : models) {
+	for (Model* model : models) {
 		if (model != nullptr) {
 			delete(model);
 		}
-	}*/
+	}
 }
 
 bool ModuleRenderExercise::Init()
@@ -56,12 +54,12 @@ update_status ModuleRenderExercise::Update()
 	glUniformMatrix4fv(1, 1, GL_TRUE, &view[0][0]);
 	glUniformMatrix4fv(2, 1, GL_TRUE, &proj[0][0]);
 	
-	//for (const Model* model : models)
-	//{
+	for (const Model* model : models)
+	{
 		float4x4 modelMatrix = model->GetModelMatrix();
 		glUniformMatrix4fv(0, 1, GL_TRUE, &modelMatrix[0][0]);
 		model->Draw(program_id);
-	//}
+	}
 	
 	App->GetModuleDebugDraw()->Draw(view, proj, App->GetWindow()->GetWidth(), App->GetWindow()->GetHeight());
 	
@@ -92,13 +90,19 @@ void ModuleRenderExercise::LoadPredefinedModel(int model)
 		case 1:
 			path = "./Models/Duck/Duck.gltf";
 			if (currentModelPath != path) {
-				LoadModel(path, float4x4::FromTRS(float3::zero, float4x4::identity, float3(.01f, .01f, .01f)));
+				LoadModel(path, float4x4::FromTRS(float3::zero, float4x4::RotateY(-math::pi / 2), float3(.01f, .01f, .01f)));
 			}
 		break;
 		case 2:
+			path = "./Models/Avocado/Avocado.gltf";
+			if (currentModelPath != path) {
+				LoadModel(path, float4x4::FromTRS(float3::zero, float4x4::RotateY(math::pi), float3(20.f, 20.f, 20.f)));
+			}
+		break;
+		case 3:
 			path = "./Models/Patricio/Patricio.gltf";
 			if (currentModelPath != path) {
-				LoadModel(path, float4x4::FromTRS(float3::zero, float4x4::RotateX(-math::pi / 2), float3(.005f, .005f, .005f)));
+				LoadModel(path, float4x4::FromTRS(float3(0.f, 0.5f, 0.f), float4x4::RotateX(-math::pi / 2), float3(.005f, .005f, .005f)));
 			}
 		break;
 		case -1:
@@ -109,9 +113,10 @@ void ModuleRenderExercise::LoadPredefinedModel(int model)
 
 void ModuleRenderExercise::LoadModel(const std::string& path, const float4x4& modelMatrix = float4x4::identity)
 {
-	//Model* model1 = new Model();
-	model->Load(path, modelMatrix);
-	//models.push_back(model1);
+	Model* model1 = new Model();
+	model1->Load(path, modelMatrix);
+	models.clear();
+	models.push_back(model1);
 
 	currentModelPath = path;
 }

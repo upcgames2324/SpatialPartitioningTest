@@ -121,7 +121,8 @@ void ModuleEditor::ShowUpperMenu() const
             if (ImGui::BeginMenu("Load")) {
                 ImGui::RadioButton("Baker house", &modelLoaded, 0);
                 ImGui::RadioButton("Duck", &modelLoaded, 1);
-                ImGui::RadioButton("Patricio", &modelLoaded, 2);
+                ImGui::RadioButton("Avocado", &modelLoaded, 2);
+                ImGui::RadioButton("Patricio", &modelLoaded, 3);
 
                 ImGui::EndMenu();
             }
