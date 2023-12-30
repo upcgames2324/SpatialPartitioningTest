@@ -69,6 +69,12 @@ update_status ModuleRenderExercise::Update()
 
 update_status ModuleRenderExercise::PostUpdate()
 {
+	int count = 0;
+	for (const auto& model : models) {
+		count += model->getIntersections(App->GetModuleCamera()->GetFrustum());
+	}
+	LOG("The number of meshes inside the frustum is: %d", count);
+
 	return UPDATE_CONTINUE;
 }
 

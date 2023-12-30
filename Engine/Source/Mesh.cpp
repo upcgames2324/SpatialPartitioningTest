@@ -23,10 +23,10 @@ Mesh::~Mesh()
 	glDeleteBuffers(1, &ebo);
 }
 
-void Mesh::Load(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive)
+void Mesh::Load(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive, float4x4 modMat)
 {
 	CreateVAO();
-	CreateVBO(model, mesh, primitive);
+	CreateVBO(model, mesh, primitive, modMat);
 	CreateEBO(model, mesh, primitive);
 
 	RenderSeparated();
@@ -62,7 +62,7 @@ void Mesh::CreateVAO()
 	glBindVertexArray(vao);
 }
 
-void Mesh::CreateVBO(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive)
+void Mesh::CreateVBO(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive, float4x4 modMat)
 {
 	const auto& itPos = primitive.attributes.find("POSITION");
 	const auto& itNormal = primitive.attributes.find("NORMAL");
@@ -81,6 +81,13 @@ void Mesh::CreateVBO(const tinygltf::Model& model, const tinygltf::Mesh& mesh, c
 		posStride = posView.byteStride;
 		bufferPos = &(posBuffer.data[posAcc.byteOffset + posView.byteOffset]);
 		bufferSize += sizeof(float) * 3;
+
+		float3 minPoint = float3(posAcc.minValues[0], posAcc.minValues[1], posAcc.minValues[2]);
+		float3 maxPoint = float3(posAcc.maxValues[0], posAcc.maxValues[1], posAcc.maxValues[2]);
+		bounding_box.SetFrom(AABB(minPoint, maxPoint), modMat);
+
+
+
 	}
 	if (itNormal != primitive.attributes.end())
 	{
@@ -195,4 +202,9 @@ void Mesh::RenderSeparated() const
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 6 * vertexCount));
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 3 * vertexCount));
+}
+
+bool Mesh::Intersects(const Frustum& myCamera) const
+{
+	return myCamera.Intersects(bounding_box);
 }

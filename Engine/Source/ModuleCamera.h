@@ -21,6 +21,8 @@ public:
 	void LookAt(const float x, const float y, const float z);
 	const float4x4 GetProjectionMatrix() const;
 	const float4x4 GetViewMatrix() const;
+	const Frustum GetFrustum() const;
+
 
 	void RotateAngle(const float3& axis, const float angle);
 

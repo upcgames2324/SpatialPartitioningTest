@@ -44,7 +44,7 @@ void Model::Load(const std::string& assetFileName, const float4x4& modelMatrix)
 		for (const auto& primitive : gltfMesh.primitives)
 		{
 			Mesh* mesh = new Mesh;
-			mesh->Load(gltfmodel, gltfMesh, primitive);
+			mesh->Load(gltfmodel, gltfMesh, primitive, modelMatrix);
 			meshes.push_back(mesh);
 		}
 	}
@@ -90,4 +90,15 @@ void Model::Draw(const unsigned programId) const
 const float4x4 Model::GetModelMatrix() const
 {
 	return modelMatrix;
+}
+
+int Model::getIntersections(const Frustum& myCamera) const
+{
+	int count = 0;
+	for (const auto& mesh : meshes) {
+		if (mesh->Intersects(myCamera)) {
+			++count;
+		}
+	}
+	return count;
 }

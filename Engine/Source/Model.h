@@ -20,6 +20,7 @@ public:
 
 	const float4x4 GetModelMatrix() const;
 
+	int getIntersections(const Frustum& myCamera) const;
 private:
 	std::vector<Mesh*> meshes;
 	std::vector<unsigned> textures;

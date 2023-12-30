@@ -36,6 +36,12 @@ update_status ModuleCamera::Update()
 {
 	CheckInputs();
 
+	AABB test = AABB::AABB(float3(-1), float3(1));
+
+	if (frustum.Intersects(test)) {
+		LOG("Intersection detected");
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -90,6 +96,11 @@ const float4x4 ModuleCamera::GetViewMatrix() const
 {
 	float4x4 viewGL = float4x4(frustum.ViewMatrix());
 	return viewGL;
+}
+
+const Frustum ModuleCamera::GetFrustum() const
+{
+	return frustum;
 }
 
 void ModuleCamera::RotateAngle(const float3& axis, const float angle)
