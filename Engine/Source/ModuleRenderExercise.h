@@ -20,6 +20,7 @@ public:
 	void LoadPredefinedModel(int model);
 	void LoadModel(const std::string& path);
 	void LoadModel(const std::string& path, const float4x4& modelMatrix);
+	const int getNumDrawCalls() const { return drawCalls; }
 
 private:
 	unsigned CreateTriangleVBO();
@@ -33,4 +34,5 @@ private:
 	ModuleProgram* moduleProgram;
 	std::vector<Model*> models;
 	std::string currentModelPath;
+	int drawCalls = 0;
 };

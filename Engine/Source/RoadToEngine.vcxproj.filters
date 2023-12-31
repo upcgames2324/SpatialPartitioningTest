@@ -139,6 +139,7 @@
     <ClCompile Include="Model.cpp">
       <Filter>Assets</Filter>
     </ClCompile>
+    <ClCompile Include="OctreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -385,6 +386,7 @@
       <Filter>Assets</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="OctreeNode.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgui">

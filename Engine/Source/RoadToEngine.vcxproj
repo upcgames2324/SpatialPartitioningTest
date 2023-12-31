@@ -199,6 +199,7 @@
     <ClCompile Include="ModuleRenderExercise.cpp" />
     <ClCompile Include="ModuleTexture.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
+    <ClCompile Include="OctreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Externals\MathGeoLib\include\Algorithm\Random\LCG.h" />
@@ -292,6 +293,7 @@
     <ClInclude Include="ModuleRenderExercise.h" />
     <ClInclude Include="ModuleTexture.h" />
     <ClInclude Include="ModuleWindow.h" />
+    <ClInclude Include="OctreeNode.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
