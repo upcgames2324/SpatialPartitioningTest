@@ -11,7 +11,7 @@ public:
 
 	void Draw(const unsigned programId, const unsigned textureId) const;
 
-	bool Intersects(const Frustum& myCamera) const;
+	bool Intersects(const Frustum& myCamera);
 
 private:
 	void CreateVAO();
@@ -34,6 +34,7 @@ private:
 	size_t vertexCount, indexCount;
 	unsigned posStride, textureStride, normalStride, bufferSize;
 	const unsigned char *bufferPos, *bufferTexture, *bufferNormal;
-	OBB bounding_box;
+	OBB boundingBox;
+	bool insideFrustum;
 };
 

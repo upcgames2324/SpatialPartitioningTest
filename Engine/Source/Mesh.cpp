@@ -34,6 +34,8 @@ void Mesh::Load(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const 
 
 void Mesh::Draw(const unsigned programId, const unsigned textureId) const
 {
+	if (!insideFrustum)
+		return;
 	glUseProgram(programId);
 	glBindVertexArray(vao);
 	//RenderSeparated();
@@ -84,7 +86,7 @@ void Mesh::CreateVBO(const tinygltf::Model& model, const tinygltf::Mesh& mesh, c
 
 		float3 minPoint = float3(posAcc.minValues[0], posAcc.minValues[1], posAcc.minValues[2]);
 		float3 maxPoint = float3(posAcc.maxValues[0], posAcc.maxValues[1], posAcc.maxValues[2]);
-		bounding_box.SetFrom(AABB(minPoint, maxPoint), modMat);
+		boundingBox.SetFrom(AABB(minPoint, maxPoint), modMat);
 
 
 
@@ -204,7 +206,9 @@ void Mesh::RenderSeparated() const
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 3 * vertexCount));
 }
 
-bool Mesh::Intersects(const Frustum& myCamera) const
+bool Mesh::Intersects(const Frustum& myCamera)
 {
-	return myCamera.Intersects(bounding_box);
+	insideFrustum = myCamera.Intersects(boundingBox);
+
+	return insideFrustum;
 }

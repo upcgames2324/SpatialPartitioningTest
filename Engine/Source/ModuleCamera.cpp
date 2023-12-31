@@ -36,12 +36,6 @@ update_status ModuleCamera::Update()
 {
 	CheckInputs();
 
-	AABB test = AABB::AABB(float3(-1), float3(1));
-
-	if (frustum.Intersects(test)) {
-		LOG("Intersection detected");
-	}
-
 	return UPDATE_CONTINUE;
 }
 
