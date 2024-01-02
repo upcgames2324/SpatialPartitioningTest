@@ -1,4 +1,6 @@
 #pragma once
+#include "Geometry/OBB.h"
+
 
 class Mesh
 {
@@ -9,6 +11,8 @@ public:
 	void Load(const tinygltf::Model& model, const tinygltf::Mesh& mesh, const tinygltf::Primitive& primitive);
 
 	void Draw(const unsigned programId, const unsigned textureId) const;
+
+	const OBB& GetBoundingBox() const { return boundingBox;}
 
 private:
 	void CreateVAO();
@@ -29,5 +33,6 @@ private:
 	size_t vertexCount, indexCount;
 	unsigned posStride, textureStride, normalStride, bufferSize;
 	const unsigned char *bufferPos, *bufferTexture, *bufferNormal;
+	OBB boundingBox;
 };
 

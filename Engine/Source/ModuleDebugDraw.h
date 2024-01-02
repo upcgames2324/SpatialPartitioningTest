@@ -4,6 +4,8 @@
 #include "Module.h"
 
 #include "Math/float4x4.h"
+#include "Geometry/Frustum.h"
+#include "Geometry/OBB.h"
 
 class DDRenderInterfaceCoreGL;
 class Camera;
@@ -16,14 +18,34 @@ public:
     ModuleDebugDraw();
     ~ModuleDebugDraw();
 
-	bool            Init();
-	update_status   Update();
-	bool            CleanUp();
+    bool            Init();
+    update_status   Update();
+    bool            CleanUp();
 
-    void            Draw(const float4x4& view, const float4x4& proj, unsigned width, unsigned height);
+    void SetDrawGrid(bool drawGrid);
+    bool GetDrawGrid() const;
+
+    void Draw(const float4x4& view, const float4x4& proj, unsigned width, unsigned height);
+    void DrawBoundingBox(const OBB& obb);
+
+
 private:
 
     static DDRenderInterfaceCoreGL* implementation;
+    bool mdrawGrid;
+
+    void DrawGrid();
+    void DrawFrustum(const Frustum& frustum);
+
 };
 
+inline void ModuleDebugDraw::SetDrawGrid(bool drawGrid)
+{
+    mdrawGrid = drawGrid;
+}
+
+inline bool ModuleDebugDraw::GetDrawGrid() const
+{
+    return mdrawGrid;
+}
 #endif /* _MODULE_DEBUGDRAW_H_ */

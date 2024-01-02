@@ -40,6 +40,8 @@ bool ModuleRenderExercise::Init()
 	program_id = moduleProgram->CreateProgram(vertex_id, fragment_id);
 
 	return true;
+
+
 }
 update_status ModuleRenderExercise::PreUpdate()
 {

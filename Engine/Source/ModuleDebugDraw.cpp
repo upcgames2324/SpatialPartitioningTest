@@ -608,19 +608,40 @@ bool ModuleDebugDraw::CleanUp()
 
 update_status  ModuleDebugDraw::Update()
 {
-	return UPDATE_CONTINUE;
+    if (mdrawGrid)
+    {
+        DrawGrid();
+    }
+    return UPDATE_CONTINUE;
 }
 
 void ModuleDebugDraw::Draw(const float4x4& view, const float4x4& proj, unsigned width, unsigned height)
 {
-    implementation->width     = width;
-    implementation->height    = height;
+    implementation->width = width;
+    implementation->height = height;
     implementation->mvpMatrix = proj * view;
-
-    dd::axisTriad(float4x4::identity, 0.1f, 1.0f);
-    dd::xzSquareGrid(-10, 10, 0.0f, 1.0f, dd::colors::Gray);
 
     dd::flush();
 }
 
+void ModuleDebugDraw::DrawBoundingBox(const OBB& obb)
+{
+    ddVec3 points[8];
+    obb.GetCornerPoints(points);
+    ddVec3 orderedPoints[8] =
+    {
+        points[0], points[1], points[3], points[2], points[4], points[5], points[7], points[6]
+    };
+    dd::box(orderedPoints, dd::colors::Blue);
+}
 
+void ModuleDebugDraw::DrawGrid()
+{
+    dd::xzSquareGrid(-500, 500, -0.1f, 1.0f, dd::colors::White);
+    dd::axisTriad(float4x4::identity, 0.0f, 25.0f);
+}
+
+void ModuleDebugDraw::DrawFrustum(const Frustum& frustum)
+{
+    dd::frustum(frustum.ViewProjMatrix().Inverted(), dd::colors::White);
+}

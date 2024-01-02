@@ -9,7 +9,7 @@
 #include <SDL_assert.h>
 
 Mesh::Mesh()
-{
+ {
 	vao = vbo = ebo = 0;
 	vertexCount = indexCount = 0;
 	posStride = textureStride = normalStride = bufferSize = 0;
@@ -37,6 +37,7 @@ void Mesh::Draw(const unsigned programId, const unsigned textureId) const
 	glUseProgram(programId);
 	glBindVertexArray(vao);
 	//RenderSeparated();
+
 	RenderInterleaved();
 
 	if (textureId != 0)
@@ -55,6 +56,7 @@ void Mesh::Draw(const unsigned programId, const unsigned textureId) const
 		glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 	}
 }
+
 
 void Mesh::CreateVAO()
 {

@@ -130,7 +130,6 @@ void ModuleEditor::ShowUpperMenu() const
                 ImGui::RadioButton("Duck", &modelLoaded, 1);
                 ImGui::RadioButton("Avocado", &modelLoaded, 2);
                 ImGui::RadioButton("Patricio", &modelLoaded, 3);
-
                 ImGui::EndMenu();
             }
             //if (ImGui::MenuItem("Open model", "Ctrl+O")) {}

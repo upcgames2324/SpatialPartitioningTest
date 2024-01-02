@@ -9,6 +9,8 @@
 #include "Application.h"
 #include "ModuleTexture.h"
 #include "Globals.h"
+#include "ModuleDebugDraw.h"
+
 #include "Math/float4x4.h"
 
 Model::Model()
@@ -56,6 +58,7 @@ void Model::Load(const std::string& assetFileName, const float4x4& modelMatrix)
 		const std::string filePath = assetFileName.substr(0, pathPos + 1);
 		LoadMaterials(gltfmodel, filePath);
 	}
+
 }
 
 void Model::LoadMaterials(const tinygltf::Model& srcModel, const std::string& filePath)
@@ -84,10 +87,20 @@ void Model::Draw(const unsigned programId) const
 	{
 		unsigned textureId = (textures.size() > i) ? textures[i] : 0;
 		meshes[i]->Draw(programId, textureId);
+
+		// Call DrawBoundingBox after drawing each mesh
+		debugDraw->DrawBoundingBox(meshes[i]->GetBoundingBox());
+
 	}
+
 }
 
 const float4x4 Model::GetModelMatrix() const
 {
 	return modelMatrix;
+}
+
+void Model::SetDebugDraw(ModuleDebugDraw* debugDraw)
+{
+	this->debugDraw = debugDraw;
 }
