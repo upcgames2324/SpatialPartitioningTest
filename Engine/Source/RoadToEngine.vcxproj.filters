@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="log.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ModuleInput.cpp" />
-    <ClCompile Include="ModuleOpenGL.cpp" />
-    <ClCompile Include="ModuleProgram.cpp" />
-    <ClCompile Include="ModuleRenderExercise.cpp" />
-    <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="..\Externals\imgui\imgui.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
@@ -24,7 +16,6 @@
     <ClCompile Include="..\Externals\imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleEditor.cpp" />
     <ClCompile Include="..\Externals\MathGeoLib\include\Algorithm\Random\LCG.cpp">
       <Filter>MathGeoLib\Algorithm/Random</Filter>
     </ClCompile>
@@ -121,9 +112,6 @@
     <ClCompile Include="..\Externals\MathGeoLib\include\Time\Clock.cpp">
       <Filter>MathGeoLib\Time</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleDebugDraw.cpp" />
-    <ClCompile Include="ModuleCamera.cpp" />
-    <ClCompile Include="ModuleTexture.cpp" />
     <ClCompile Include="..\Externals\imgui\backends\imgui_impl_opengl2.cpp">
       <Filter>imgui\impl</Filter>
     </ClCompile>
@@ -139,18 +127,45 @@
     <ClCompile Include="Model.cpp">
       <Filter>Assets</Filter>
     </ClCompile>
-    <ClCompile Include="OctreeNode.cpp" />
+    <ClCompile Include="Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="log.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCamera.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleDebugDraw.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEditor.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleInput.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleOpenGL.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleProgram.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRenderExercise.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTexture.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="Dummy.h" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="Module.h" />
-    <ClInclude Include="ModuleInput.h" />
-    <ClInclude Include="ModuleOpenGL.h" />
-    <ClInclude Include="ModuleProgram.h" />
-    <ClInclude Include="ModuleRenderExercise.h" />
-    <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="..\Externals\imgui\imconfig.h">
       <Filter>imgui</Filter>
     </ClInclude>
@@ -169,7 +184,6 @@
     <ClInclude Include="..\Externals\imgui\imstb_truetype.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleEditor.h" />
     <ClInclude Include="..\Externals\MathGeoLib\include\MathBuildConfig.h">
       <Filter>MathGeoLib</Filter>
     </ClInclude>
@@ -352,9 +366,6 @@
     </ClInclude>
     <ClInclude Include="debug_draw.hpp" />
     <ClInclude Include="debugdraw.h" />
-    <ClInclude Include="ModuleDebugDraw.h" />
-    <ClInclude Include="ModuleCamera.h" />
-    <ClInclude Include="ModuleTexture.h" />
     <ClInclude Include="..\Externals\imgui\backends\imgui_impl_opengl2.h">
       <Filter>imgui\impl</Filter>
     </ClInclude>
@@ -385,8 +396,42 @@
     <ClInclude Include="Model.h">
       <Filter>Assets</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="OctreeNode.h" />
+    <ClInclude Include="Application.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCamera.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleDebugDraw.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEditor.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleOpenGL.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleProgram.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRenderExercise.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTexture.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgui">
@@ -416,6 +461,15 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{d325224c-4cd2-4cae-b534-43c4e01394e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{7e2d8723-3359-40b9-86fb-bd7716249996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{2217cc61-da1d-4e01-8715-77983cdf0221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TavernaLogic">
+      <UniqueIdentifier>{3ef30ede-cec3-4579-b233-b2b2eeb06b71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Externals\MathGeoLib\include\Geometry\KDTree.inl">
@@ -436,9 +490,103 @@
     <None Include="..\Externals\MathGeoLib\include\Math\Matrix.inl">
       <Filter>MathGeoLib\Math</Filter>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <Filter>Core</Filter>
+    </None>
+    <None Include="CamaraDeJugador.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="CamaraDeJugador.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="CartaDeCliente.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="CartaDeCliente.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="CartaDeFavorReal.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="CartaDeFavorReal.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="CartaDeHechizo.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="CartaDeHechizo.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="Dignatario.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="Dignatario.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="GlobalsTaverna.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="GlobalsTaverna.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="HuecoDeDignatario.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="HuecoDeDignatario.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="HuecoDeMesa.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="HuecoDeMesa.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="HuecoDePropiedad.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="HuecoDePropiedad.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="Jugador.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="Jugador.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="MazoDeClientes.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="MazoDeClientes.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="MazoDeFavoresReales.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="MazoDeFavoresReales.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="MazoDeHechizos.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="MazoDeHechizos.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="Tablero.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="Tablero.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="Taverna.cpp">
+      <Filter>TavernaLogic</Filter>
+    </None>
+    <None Include="Taverna.h">
+      <Filter>TavernaLogic</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="RoadToEngine.rc" />
+    <ResourceCompile Include="RoadToEngine.rc">
+      <Filter>Core</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

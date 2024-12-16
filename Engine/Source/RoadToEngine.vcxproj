@@ -199,7 +199,6 @@
     <ClCompile Include="ModuleRenderExercise.cpp" />
     <ClCompile Include="ModuleTexture.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
-    <ClCompile Include="OctreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Externals\MathGeoLib\include\Algorithm\Random\LCG.h" />
@@ -269,7 +268,6 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="debugdraw.h" />
     <ClInclude Include="debug_draw.hpp" />
-    <ClInclude Include="Dummy.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="..\Externals\imgui\backends\imgui_impl_opengl2.h" />
     <ClInclude Include="..\Externals\imgui\backends\imgui_impl_opengl3.h" />
@@ -293,7 +291,6 @@
     <ClInclude Include="ModuleRenderExercise.h" />
     <ClInclude Include="ModuleTexture.h" />
     <ClInclude Include="ModuleWindow.h" />
-    <ClInclude Include="OctreeNode.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -303,7 +300,37 @@
     <None Include="..\Externals\MathGeoLib\include\Geometry\TriangleMesh_IntersectRay_CPP.inl" />
     <None Include="..\Externals\MathGeoLib\include\Geometry\TriangleMesh_IntersectRay_SSE.inl" />
     <None Include="..\Externals\MathGeoLib\include\Math\Matrix.inl" />
+    <None Include="CamaraDeJugador.cpp" />
+    <None Include="CamaraDeJugador.h" />
+    <None Include="CartaDeCliente.cpp" />
+    <None Include="CartaDeCliente.h" />
+    <None Include="CartaDeFavorReal.cpp" />
+    <None Include="CartaDeFavorReal.h" />
+    <None Include="CartaDeHechizo.cpp" />
+    <None Include="CartaDeHechizo.h" />
+    <None Include="Dignatario.cpp" />
+    <None Include="Dignatario.h" />
+    <None Include="GlobalsTaverna.cpp" />
+    <None Include="GlobalsTaverna.h" />
+    <None Include="HuecoDeDignatario.cpp" />
+    <None Include="HuecoDeDignatario.h" />
+    <None Include="HuecoDeMesa.cpp" />
+    <None Include="HuecoDeMesa.h" />
+    <None Include="HuecoDePropiedad.cpp" />
+    <None Include="HuecoDePropiedad.h" />
+    <None Include="Jugador.cpp" />
+    <None Include="Jugador.h" />
+    <None Include="MazoDeClientes.cpp" />
+    <None Include="MazoDeClientes.h" />
+    <None Include="MazoDeFavoresReales.cpp" />
+    <None Include="MazoDeFavoresReales.h" />
+    <None Include="MazoDeHechizos.cpp" />
+    <None Include="MazoDeHechizos.h" />
     <None Include="packages.config" />
+    <None Include="Tablero.cpp" />
+    <None Include="Tablero.h" />
+    <None Include="Taverna.cpp" />
+    <None Include="Taverna.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RoadToEngine.rc" />
