@@ -310,6 +310,10 @@
     <None Include="CartaDeHechizo.h" />
     <None Include="Dignatario.cpp" />
     <None Include="Dignatario.h" />
+    <None Include="DwarfScore.cpp" />
+    <None Include="DwarfScore.h" />
+    <None Include="ElvenScore.cpp" />
+    <None Include="ElvenScore.h" />
     <None Include="GlobalsTaverna.cpp" />
     <None Include="GlobalsTaverna.h" />
     <None Include="HuecoDeDignatario.cpp" />
@@ -318,6 +322,8 @@
     <None Include="HuecoDeMesa.h" />
     <None Include="HuecoDePropiedad.cpp" />
     <None Include="HuecoDePropiedad.h" />
+    <None Include="HumanScore.cpp" />
+    <None Include="HumanScore.h" />
     <None Include="Jugador.cpp" />
     <None Include="Jugador.h" />
     <None Include="MazoDeClientes.cpp" />
@@ -326,7 +332,11 @@
     <None Include="MazoDeFavoresReales.h" />
     <None Include="MazoDeHechizos.cpp" />
     <None Include="MazoDeHechizos.h" />
+    <None Include="OrcScore.cpp" />
+    <None Include="OrcScore.h" />
     <None Include="packages.config" />
+    <None Include="RaceScore.cpp" />
+    <None Include="RaceScore.h" />
     <None Include="Tablero.cpp" />
     <None Include="Tablero.h" />
     <None Include="Taverna.cpp" />

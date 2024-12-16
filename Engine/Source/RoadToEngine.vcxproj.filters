@@ -470,6 +470,21 @@
     <Filter Include="TavernaLogic">
       <UniqueIdentifier>{3ef30ede-cec3-4579-b233-b2b2eeb06b71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TavernaLogic\Borad">
+      <UniqueIdentifier>{16fd8fe9-814e-4bd0-8fc8-7f3917cde971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TavernaLogic\Player">
+      <UniqueIdentifier>{4eabc232-c968-4a32-bd13-65d23ee0db54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TavernaLogic\Borad\Tavern">
+      <UniqueIdentifier>{e460af99-6ca3-4c15-ae5d-c8440b614c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TavernaLogic\Borad\Decks">
+      <UniqueIdentifier>{3888fd62-5dd6-4eef-a4e5-418cb409c094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TavernaLogic\Borad\Scores">
+      <UniqueIdentifier>{61b7e03a-b932-4fa9-aedb-3d3af7b20e1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Externals\MathGeoLib\include\Geometry\KDTree.inl">
@@ -493,95 +508,123 @@
     <None Include="packages.config">
       <Filter>Core</Filter>
     </None>
-    <None Include="CamaraDeJugador.cpp">
-      <Filter>TavernaLogic</Filter>
-    </None>
-    <None Include="CamaraDeJugador.h">
-      <Filter>TavernaLogic</Filter>
-    </None>
-    <None Include="CartaDeCliente.cpp">
-      <Filter>TavernaLogic</Filter>
-    </None>
-    <None Include="CartaDeCliente.h">
-      <Filter>TavernaLogic</Filter>
-    </None>
-    <None Include="CartaDeFavorReal.cpp">
-      <Filter>TavernaLogic</Filter>
-    </None>
-    <None Include="CartaDeFavorReal.h">
-      <Filter>TavernaLogic</Filter>
-    </None>
-    <None Include="CartaDeHechizo.cpp">
-      <Filter>TavernaLogic</Filter>
-    </None>
-    <None Include="CartaDeHechizo.h">
-      <Filter>TavernaLogic</Filter>
-    </None>
-    <None Include="Dignatario.cpp">
-      <Filter>TavernaLogic</Filter>
-    </None>
-    <None Include="Dignatario.h">
-      <Filter>TavernaLogic</Filter>
-    </None>
     <None Include="GlobalsTaverna.cpp">
       <Filter>TavernaLogic</Filter>
     </None>
     <None Include="GlobalsTaverna.h">
       <Filter>TavernaLogic</Filter>
     </None>
+    <None Include="CamaraDeJugador.cpp">
+      <Filter>TavernaLogic\Player</Filter>
+    </None>
+    <None Include="CamaraDeJugador.h">
+      <Filter>TavernaLogic\Player</Filter>
+    </None>
+    <None Include="CartaDeCliente.cpp">
+      <Filter>TavernaLogic\Borad\Decks</Filter>
+    </None>
+    <None Include="CartaDeCliente.h">
+      <Filter>TavernaLogic\Borad\Decks</Filter>
+    </None>
+    <None Include="CartaDeFavorReal.cpp">
+      <Filter>TavernaLogic\Borad\Decks</Filter>
+    </None>
+    <None Include="CartaDeFavorReal.h">
+      <Filter>TavernaLogic\Borad\Decks</Filter>
+    </None>
+    <None Include="CartaDeHechizo.cpp">
+      <Filter>TavernaLogic\Borad\Decks</Filter>
+    </None>
+    <None Include="CartaDeHechizo.h">
+      <Filter>TavernaLogic\Borad\Decks</Filter>
+    </None>
+    <None Include="Dignatario.cpp">
+      <Filter>TavernaLogic\Borad\Tavern</Filter>
+    </None>
+    <None Include="Dignatario.h">
+      <Filter>TavernaLogic\Borad\Tavern</Filter>
+    </None>
     <None Include="HuecoDeDignatario.cpp">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Tavern</Filter>
     </None>
     <None Include="HuecoDeDignatario.h">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Tavern</Filter>
     </None>
     <None Include="HuecoDeMesa.cpp">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Tavern</Filter>
     </None>
     <None Include="HuecoDeMesa.h">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Tavern</Filter>
     </None>
     <None Include="HuecoDePropiedad.cpp">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Tavern</Filter>
     </None>
     <None Include="HuecoDePropiedad.h">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Tavern</Filter>
     </None>
     <None Include="Jugador.cpp">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Player</Filter>
     </None>
     <None Include="Jugador.h">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Player</Filter>
     </None>
     <None Include="MazoDeClientes.cpp">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Decks</Filter>
     </None>
     <None Include="MazoDeClientes.h">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Decks</Filter>
     </None>
     <None Include="MazoDeFavoresReales.cpp">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Decks</Filter>
     </None>
     <None Include="MazoDeFavoresReales.h">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Decks</Filter>
     </None>
     <None Include="MazoDeHechizos.cpp">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Decks</Filter>
     </None>
     <None Include="MazoDeHechizos.h">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Decks</Filter>
     </None>
     <None Include="Tablero.cpp">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad</Filter>
     </None>
     <None Include="Tablero.h">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad</Filter>
     </None>
     <None Include="Taverna.cpp">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Tavern</Filter>
     </None>
     <None Include="Taverna.h">
-      <Filter>TavernaLogic</Filter>
+      <Filter>TavernaLogic\Borad\Tavern</Filter>
+    </None>
+    <None Include="RaceScore.cpp">
+      <Filter>TavernaLogic\Borad\Scores</Filter>
+    </None>
+    <None Include="RaceScore.h">
+      <Filter>TavernaLogic\Borad\Scores</Filter>
+    </None>
+    <None Include="ElvenScore.h" />
+    <None Include="OrcScore.h">
+      <Filter>TavernaLogic\Borad\Scores</Filter>
+    </None>
+    <None Include="HumanScore.cpp">
+      <Filter>TavernaLogic\Borad\Scores</Filter>
+    </None>
+    <None Include="HumanScore.h">
+      <Filter>TavernaLogic\Borad\Scores</Filter>
+    </None>
+    <None Include="OrcScore.cpp">
+      <Filter>TavernaLogic\Borad\Scores</Filter>
+    </None>
+    <None Include="ElvenScore.cpp">
+      <Filter>TavernaLogic\Borad\Scores</Filter>
+    </None>
+    <None Include="DwarfScore.cpp">
+      <Filter>TavernaLogic\Borad\Scores</Filter>
+    </None>
+    <None Include="DwarfScore.h">
+      <Filter>TavernaLogic\Borad\Scores</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
